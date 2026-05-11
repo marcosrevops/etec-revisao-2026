@@ -233,6 +233,164 @@ body {
   margin-top: 12px;
 }
 
+.btn-study {
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(16,185,129,0.3);
+  margin-top: 12px;
+}
+
+.btn-study:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(16,185,129,0.4); }
+
+/* ====== STUDY CONTENT ====== */
+.study-blocks-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.study-block-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.study-block-card:hover { background: var(--bg-card-hover); transform: translateY(-1px); }
+.study-block-card:active { transform: translateY(0); }
+
+.study-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.study-section {
+  margin-bottom: 28px;
+  animation: fadeIn 0.3s ease;
+}
+
+.study-section-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--primary-light);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border);
+}
+
+.study-topic {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 12px;
+}
+
+.study-topic-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.study-topic-title::before {
+  content: '';
+  width: 4px;
+  height: 16px;
+  background: linear-gradient(135deg, var(--primary), var(--purple));
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.study-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+.study-text:last-child { margin-bottom: 0; }
+
+.study-highlight {
+  background: rgba(99,102,241,0.1);
+  border: 1px solid rgba(99,102,241,0.2);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin: 10px 0;
+  font-size: 13px;
+  color: var(--primary-light);
+  line-height: 1.6;
+}
+
+.study-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 12px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.study-table th {
+  background: rgba(99,102,241,0.15);
+  padding: 8px 10px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--primary-light);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.study-table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.study-table tr:nth-child(even) td { background: rgba(99,102,241,0.04); }
+
+.study-tip {
+  background: var(--amber-bg);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-left: 4px solid var(--amber);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin: 10px 0;
+  font-size: 13px;
+  color: #d4b896;
+  line-height: 1.5;
+}
+
+.study-tip strong { color: var(--amber); }
+
+.study-formula {
+  background: rgba(139,92,246,0.1);
+  border: 1px solid rgba(139,92,246,0.2);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin: 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #c4b5fd;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+}
+
+.study-nav-bottom {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
 /* ====== BLOCK SELECTION ====== */
 .blocks-grid {
   display: flex;
@@ -738,7 +896,8 @@ body {
       </div>
     </div>
 
-    <button class="btn btn-primary" onclick="navigate('#/blocks')">Escolher Bloco</button>
+    <button class="btn btn-primary" onclick="navigate('#/blocks')">Fazer Simulado</button>
+    <button class="btn btn-study" onclick="navigate('#/study')">Estudar Conteudo</button>
     <button class="btn btn-secondary" onclick="navigate('#/dashboard')">Ver Dashboard</button>
   </div>
 
@@ -788,6 +947,22 @@ body {
     </div>
     <button class="btn btn-primary" onclick="retryBlock()">Refazer Bloco</button>
     <button class="btn btn-secondary" onclick="navigate('#/blocks')">Voltar aos Blocos</button>
+  </div>
+
+  <!-- SCREEN: STUDY MENU -->
+  <div class="screen" id="screenStudy">
+    <h2 class="dashboard-title">Conteudo Programatico</h2>
+    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:20px;">Escolha uma materia para estudar a teoria antes do simulado.</p>
+    <div class="study-blocks-grid" id="studyBlocksGrid"></div>
+  </div>
+
+  <!-- SCREEN: STUDY CONTENT -->
+  <div class="screen" id="screenStudyContent">
+    <div class="study-content" id="studyContentArea"></div>
+    <div class="study-nav-bottom">
+      <button class="btn btn-primary" onclick="goToQuizFromStudy()">Testar Este Bloco</button>
+      <button class="btn btn-secondary" onclick="navigate('#/study')">Voltar as Materias</button>
+    </div>
   </div>
 
   <!-- SCREEN: DASHBOARD -->
@@ -1496,7 +1671,9 @@ function goBack() {
   const hash = window.location.hash;
   if (hash.startsWith('#/quiz/') || hash.startsWith('#/results/')) {
     navigate('#/blocks');
-  } else if (hash === '#/blocks' || hash === '#/dashboard') {
+  } else if (hash.startsWith('#/study/')) {
+    navigate('#/study');
+  } else if (hash === '#/blocks' || hash === '#/dashboard' || hash === '#/study') {
     navigate('#/');
   } else {
     navigate('#/');
@@ -1543,6 +1720,19 @@ function handleRoute() {
     navTitle.textContent = 'Dashboard';
     navProgress.textContent = '';
     renderDashboard();
+  } else if (hash === '#/study') {
+    document.getElementById('screenStudy').classList.add('active');
+    navBack.style.display = 'inline-block';
+    navTitle.textContent = 'Estudar';
+    navProgress.textContent = '';
+    renderStudyMenu();
+  } else if (hash.startsWith('#/study/')) {
+    const blockId = parseInt(hash.split('/')[2]);
+    document.getElementById('screenStudyContent').classList.add('active');
+    navBack.style.display = 'inline-block';
+    navTitle.textContent = getBlockName(blockId);
+    navProgress.textContent = '';
+    renderStudyContent(blockId);
   }
 }
 
@@ -1907,6 +2097,344 @@ function confirmReset() {
       btn.dataset.confirm = '';
     }, 3000);
   }
+}
+
+// ====== STUDY CONTENT DATA ======
+let studyBlockId = null;
+
+const STUDY_CONTENT = {
+  1: {
+    title: "Lingua Portuguesa",
+    sections: [
+      {
+        title: "Interpretacao e Compreensao de Texto",
+        topics: [
+          {title:"Coerencia", text:"E a logica interna do texto — as ideias fazem sentido juntas, sem contradicoes. Um texto coerente tem unidade de sentido e progressao logica."},
+          {title:"Coesao", text:"Sao os mecanismos linguisticos que ligam as partes do texto: pronomes, conjuncoes, sinonimos, repeticoes. Elementos coesivos: este/esse, portanto, alem disso, no entanto."},
+          {title:"Ideia Central vs. Ideias Perifericas", text:"A ideia central (tese) e o argumento principal do texto. Ideias perifericas sao os detalhes, exemplos e argumentos secundarios que apoiam a ideia central."},
+          {title:"Tipos de Discurso", text:"<strong>Direto:</strong> fala do personagem com travessao ou aspas (\"Eu vou\", disse Maria). <strong>Indireto:</strong> narrador reproduz a fala (Maria disse que iria). <strong>Indireto Livre:</strong> mistura voz do narrador e personagem sem marcacao."},
+          {title:"Tipologia Textual", text:"<strong>Narrativo:</strong> conta fatos (personagem, tempo, espaco, enredo). <strong>Descritivo:</strong> detalha caracteristicas (adjetivos). <strong>Dissertativo:</strong> expoe ideias, argumenta (tese + argumentos + conclusao)."}
+        ]
+      },
+      {
+        title: "Fonologia e Ortografia",
+        topics: [
+          {title:"Encontros Vocalicos", text:"<strong>Ditongo:</strong> 2 vogais na mesma silaba (pai, lei, mau). <strong>Tritongo:</strong> 3 vogais na mesma silaba (Paraguai). <strong>Hiato:</strong> 2 vogais em silabas separadas (sa-u-de, pi-a-no)."},
+          {title:"Digrafos", text:"Duas letras com um so som: ch, lh, nh, rr, ss, sc, xc, qu, gu. Nao separe digrafos na divisao silabica (exceto rr, ss, sc, xc)."},
+          {title:"Ortografia - Dicas", text:"<strong>-izar/-isar:</strong> se a palavra base tem 's', usa -isar (analise > analisar); senao, usa -izar (util > utilizar). <strong>-cao/-ssao:</strong> -cao (redacao, excecao); -ssao (concessao, discussao)."}
+        ]
+      },
+      {
+        title: "Acentuacao Grafica",
+        topics: [
+          {title:"Regras Basicas", text:"<strong>Oxitonas:</strong> acentua terminadas em a(s), e(s), o(s), em, ens (cafe, voce, tambem). <strong>Paroxitonas:</strong> acentua terminadas em l, n, r, x, i(s), us, um, ao, ditongo (facil, polen, acucar). <strong>Proparoxitonas:</strong> TODAS acentuadas (medico, arvore, lampada)."},
+          {title:"Regras Especiais", text:"Hiatos: acentua i/u tonicos isolados na silaba (saude, pais). NAO acentua se seguido de 'nh' (rainha) ou se formam ditongo na mesma silaba. Acento diferencial: por (preposicao) vs. por (verbo), pode (presente) vs. pode (passado)."}
+        ]
+      },
+      {
+        title: "Morfologia (Classes de Palavras)",
+        topics: [
+          {title:"10 Classes", text:"<strong>Variaveis:</strong> substantivo, adjetivo, artigo, numeral, pronome, verbo. <strong>Invariaveis:</strong> adverbio, preposicao, conjuncao, interjeicao."},
+          {title:"Formacao de Palavras", text:"<strong>Derivacao:</strong> prefixal (infeliz), sufixal (felizmente), prefixal e sufixal (infelizmente), parassintese (anoitecer = a+noite+cer, simultaneo). <strong>Composicao:</strong> justaposicao (guarda-chuva), aglutinacao (aguardente = agua+ardente)."},
+          {title:"Verbos Irregulares Importantes", text:"Ter/Vir: ele tem / eles tem; ele vem / eles vem. Ver: eu vejo, ele viu, eles viram. Por: eu ponho, ele pos. Ir: eu fui, ele foi (igual ser no passado)."}
+        ]
+      },
+      {
+        title: "Sintaxe",
+        topics: [
+          {title:"Termos da Oracao", text:"<strong>Essenciais:</strong> sujeito e predicado. <strong>Integrantes:</strong> objeto direto, objeto indireto, complemento nominal, agente da passiva. <strong>Acessorios:</strong> adjunto adnominal, adjunto adverbial, aposto. <strong>Vocativo:</strong> chamamento (Maria, venha aqui)."},
+          {title:"Concordancia Verbal", text:"Regra geral: verbo concorda com sujeito. <strong>Verbos impessoais (singular):</strong> haver (= existir), fazer (tempo), fenomenos naturais. <strong>Cuidado:</strong> existir, ocorrer, acontecer CONCORDAM com sujeito."},
+          {title:"Concordancia Nominal", text:"Adjetivo concorda com substantivo em genero e numero. Adjetivo pos-posto a 2+ substantivos: concorda com o mais proximo OU vai para o plural. Adjetivo anteposto: concorda com o mais proximo."},
+          {title:"Regencia Verbal", text:"Verbos e suas preposicoes: <strong>Assistir</strong> (a = ver; - = ajudar), <strong>Visar</strong> (a = almejar; - = mirar), <strong>Preferir</strong> (a, NUNCA 'do que'), <strong>Obedecer</strong> (a), <strong>Namorar</strong> (sem preposicao), <strong>Implicar</strong> (- = acarretar; em = envolver-se)."},
+          {title:"Crase", text:"Crase = preposicao 'a' + artigo 'a'. <strong>Usa:</strong> locucoes femininas (as vezes, a noite, a esquerda), antes de horas (as 8h), 'a moda de'. <strong>Nunca usa:</strong> antes de verbo, palavra masculina, pronome de tratamento, 'a' no singular + palavra plural."},
+          {title:"Colocacao Pronominal", text:"<strong>Proclise</strong> (antes): negacao, adverbio, pronome indefinido/relativo, conjuncao subordinativa. <strong>Enclise</strong> (depois): inicio de frase, imperativo afirmativo, gerundio sem 'em'. <strong>Mesoclise</strong>: futuro do presente/preterito (far-se-a)."}
+        ]
+      },
+      {
+        title: "Figuras de Linguagem",
+        topics: [
+          {title:"Figuras de Palavras", text:"<strong>Metafora:</strong> comparacao implicita (Ela e uma flor). <strong>Metonimia:</strong> parte pelo todo / autor pela obra (Li Machado = li obra de Machado). <strong>Catacrese:</strong> metafora desgastada (pe da mesa, asa do aviao)."},
+          {title:"Figuras de Pensamento", text:"<strong>Hiperbole:</strong> exagero (chorei rios). <strong>Eufemismo:</strong> suavizacao (ele partiu = morreu). <strong>Ironia:</strong> diz o contrario do que pensa. <strong>Prosopopeia:</strong> atribuir qualidades humanas a seres nao humanos (o sol sorriu)."},
+          {title:"Figuras de Sintaxe", text:"<strong>Elipse:</strong> omissao de termo recuperavel. <strong>Pleonasmo:</strong> redundancia para enfase (vi com meus proprios olhos). <strong>Anacoluto:</strong> quebra da estrutura sintatica. <strong>Silepse:</strong> concordancia com a ideia, nao com a palavra."}
+        ]
+      },
+      {
+        title: "Pontuacao",
+        topics: [
+          {title:"Virgula - Regras Essenciais", text:"<strong>NUNCA</strong> separe: sujeito-verbo, verbo-complemento. <strong>SEMPRE</strong> use em: aposto explicativo, vocativo, adjunto adverbial deslocado (no inicio), enumeracoes, oracoes coordenadas com 'mas/porem/contudo', oracoes adverbiais antepostas."},
+          {title:"Ponto e Virgula", text:"Separa itens de enumeracao complexa ou oracoes coordenadas longas. Marca pausa maior que virgula e menor que ponto."},
+          {title:"Dois Pontos", text:"Introduz: enumeracao, explicacao, fala de personagem (discurso direto), citacao, aposto."}
+        ]
+      }
+    ]
+  },
+  2: {
+    title: "Matematica",
+    sections: [
+      {
+        title: "Raciocinio Logico",
+        topics: [
+          {title:"Proposicoes", text:"Sentenca declarativa que pode ser verdadeira (V) ou falsa (F). Proposicoes simples: 'O sol e uma estrela'. Proposicoes compostas usam conectivos logicos."},
+          {title:"Conectivos Logicos", text:"<strong>E (conjuncao ^):</strong> V apenas quando ambas sao V. <strong>OU (disjuncao v):</strong> F apenas quando ambas sao F. <strong>SE...ENTAO (condicional ->):</strong> F apenas quando a 1a e V e a 2a e F. <strong>Negacao (~):</strong> inverte o valor."},
+          {title:"Contrapositiva", text:"A contrapositiva de 'Se P entao Q' e 'Se nao-Q entao nao-P' — sempre tem o MESMO valor logico da original. A inversa ('Se Q entao P') e a reciproca NAO sao equivalentes."}
+        ]
+      },
+      {
+        title: "Operacoes e Numeros",
+        topics: [
+          {title:"Numeros Naturais e Fracionarios", text:"Naturais: 0, 1, 2, 3... Fracoes: a/b onde b!=0. Operacoes com fracoes: para somar/subtrair, iguale denominadores (MMC). Para multiplicar, multiplique direto. Para dividir, inverta a 2a e multiplique."},
+          {title:"MMC e MDC", text:"<strong>MMC</strong> (Minimo Multiplo Comum): fatore ambos, pegue MAIORES expoentes. <strong>MDC</strong> (Maximo Divisor Comum): pegue MENORES expoentes comuns. Relacao: MMC(a,b) x MDC(a,b) = a x b."}
+        ]
+      },
+      {
+        title: "Equacoes",
+        topics: [
+          {title:"Equacao 1o Grau", text:"Forma: ax + b = 0. Resolucao: isole x. Ao trocar de lado, inverta operacao. Exemplo: 3x - 6 = 0 => 3x = 6 => x = 2."},
+          {title:"Sistema de 2 Equacoes", text:"Metodo da substituicao: isole uma variavel e substitua na outra equacao. Metodo da adicao: multiplique para anular uma variavel e some as equacoes."},
+          {title:"Equacao 2o Grau", text:"Forma: ax^2 + bx + c = 0. <strong>Formula de Bhaskara:</strong> delta = b^2 - 4ac. Se delta > 0: 2 raizes reais. Se delta = 0: 1 raiz (dupla). Se delta < 0: nao ha raiz real. x = (-b +/- raiz(delta)) / 2a. <strong>Atalho (Soma e Produto):</strong> se a=1, soma das raizes = -b, produto = c."}
+        ]
+      },
+      {
+        title: "Proporcionalidade",
+        topics: [
+          {title:"Razao e Proporcao", text:"Razao = divisao entre duas grandezas (a/b). Proporcao = igualdade entre duas razoes (a/b = c/d). Propriedade fundamental: a.d = b.c."},
+          {title:"Regra de Tres Simples", text:"Identifique se as grandezas sao diretamente (sobem juntas) ou inversamente (uma sobe, outra desce) proporcionais. Direta: multiplique em cruz normalmente. Inversa: inverta uma das razoes antes de resolver."},
+          {title:"Regra de Tres Composta", text:"Quando ha 3 ou mais grandezas. Monte a tabela, identifique a relacao de cada grandeza com a incognita (direta ou inversa), inverta as inversas e multiplique tudo."}
+        ]
+      },
+      {
+        title: "Porcentagem e Juros",
+        topics: [
+          {title:"Porcentagem", text:"X% = X/100. Aumento de P%: multiplique por (1 + P/100). Desconto de P%: multiplique por (1 - P/100). Aumentos sucessivos: multiplique os fatores. Ex: dois aumentos de 10% = 1,10 x 1,10 = 1,21 (21% total, nao 20%)."},
+          {title:"Juros Simples", text:"J = C . i . t (Capital x taxa x tempo). Montante: M = C + J = C(1 + i.t). Os juros sao sempre sobre o capital INICIAL. Taxa e tempo devem estar na mesma unidade."},
+          {title:"Juros Compostos", text:"M = C . (1 + i)^t. Juros incidem sobre o montante do periodo anterior (juros sobre juros). Diferenca para simples cresce com o tempo. Para periodos pequenos (1-2 meses) a diferenca e pequena."}
+        ]
+      },
+      {
+        title: "Probabilidade e Combinatoria",
+        topics: [
+          {title:"Probabilidade", text:"P = casos favoraveis / casos possiveis. Dado: 6 faces. Baralho: 52 cartas (4 naipes x 13 valores). Moeda: 2 faces. Eventos independentes: multiplique probabilidades. Eventos mutuamente exclusivos: some probabilidades."},
+          {title:"Analise Combinatoria", text:"<strong>Arranjo</strong> (ordem importa): A(n,p) = n!/(n-p)!. <strong>Combinacao</strong> (ordem NAO importa): C(n,p) = n!/[p!(n-p)!]. <strong>Permutacao:</strong> P(n) = n!. Dica: 'quantos grupos?' = combinacao. 'De quantas maneiras ordenar?' = arranjo."}
+        ]
+      },
+      {
+        title: "Sequencias",
+        topics: [
+          {title:"Progressao Aritmetica (PA)", text:"Razao constante entre termos consecutivos. Termo geral: an = a1 + (n-1).r. Soma dos n primeiros: Sn = (a1 + an).n/2. Exemplo: PA(2,5,8,11...) r=3, a10 = 2 + 9.3 = 29."},
+          {title:"Progressao Geometrica (PG)", text:"Razao obtida por divisao entre termos consecutivos. Termo geral: an = a1 . q^(n-1). Soma finita: Sn = a1.(q^n - 1)/(q - 1). Exemplo: PG(2,6,18,54...) q=3."}
+        ]
+      }
+    ]
+  },
+  3: {
+    title: "Conhecimentos Gerais / Atualidades",
+    sections: [
+      {
+        title: "Piratininga-SP",
+        topics: [
+          {title:"Dados Gerais", text:"Municipio da regiao Centro-Oeste Paulista, proximo a Bauru (~25 km). Populacao: cerca de 13 mil habitantes. Area: ~389 km2. Gentilico: piratiningense. Fundacao: 1891 (emancipacao)."},
+          {title:"Geografia", text:"<strong>Clima:</strong> tropical com estacao seca (Cwa). <strong>Relevo:</strong> planalto ocidental paulista, suave ondulado. <strong>Hidrografia:</strong> Rio Batalha (principal). <strong>Vegetacao:</strong> originalmente Mata Atlantica e Cerrado, hoje predomina pastagem e agricultura."},
+          {title:"Economia", text:"Base agropecuaria: pecuaria de corte e leite, cana-de-acucar, cafe. Setor de servicos e comercio local. Proximidade com Bauru facilita acesso a servicos de maior porte."},
+          {title:"Origem do Nome", text:"'Piratininga' vem do tupi-guarani: pira (peixe) + tininga (seco) = 'peixe seco ao sol'. Mesmo nome historico de Sao Paulo (Sao Paulo de Piratininga, fundada pelos jesuitas em 1554)."}
+        ]
+      },
+      {
+        title: "Atualidades Brasil (2021-2026)",
+        topics: [
+          {title:"Reforma Tributaria (2023)", text:"EC 132/2023 criou CBS (federal, substitui PIS/COFINS/IPI) + IBS (estadual/municipal, substitui ICMS/ISS). Modelo de IVA dual. Transicao: 2026-2033. Imposto Seletivo ('imposto do pecado') para produtos nocivos (cigarro, bebida, acucar)."},
+          {title:"PIX e Economia Digital", text:"PIX lancado em nov/2020 pelo Banco Central. Transferencias instantaneas 24/7, gratuito para PF. Drex (Real Digital): CBDC brasileira em desenvolvimento. Open Finance: compartilhamento de dados bancarios entre instituicoes."},
+          {title:"Marco Legal da IA", text:"Brasil discute regulamentacao de IA desde 2023. PL 2338/2023 propoe regras de transparencia, responsabilidade e classificacao de risco para sistemas de IA. Inspirado no AI Act europeu."},
+          {title:"Politica e Governo", text:"Eleicoes 2022: Lula (PT) eleito presidente no 2o turno. STF: julgamentos sobre marco temporal indigena, descriminalizacao de drogas para uso pessoal. Congresso: reformas tributaria e administrativa em pauta."}
+        ]
+      },
+      {
+        title: "Atualidades Mundo",
+        topics: [
+          {title:"Conflito Russia-Ucrania", text:"Iniciado em fev/2022 com invasao russa. Maior conflito na Europa desde a 2a Guerra. Sancoes economicas contra Russia. OTAN fortalecida. Impacto global em energia e alimentos."},
+          {title:"BRICS+", text:"Expansao em jan/2024: Arabia Saudita, EAU, Egito, Etiopia, Ira aderiram ao bloco original (Brasil, Russia, India, China, Africa do Sul). Objetivo: multipolaridade, alternativa ao G7, moeda comum em discussao. NDB (Novo Banco de Desenvolvimento)."},
+          {title:"Inteligencia Artificial", text:"ChatGPT (OpenAI) lancado em nov/2022 popularizou IA generativa. Debatea global sobre regulamentacao. UE aprovou AI Act (2024) — primeira lei abrangente de IA do mundo. Preocupacoes: deepfakes, desemprego tecnologico, privacidade."},
+          {title:"Mudancas Climaticas", text:"Acordo de Paris: limitar aquecimento a 1,5C. COP28 (2023, Dubai): acordo historico mencionando transicao dos combustiveis fosseis. Eventos extremos crescentes: ondas de calor, enchentes, secas."}
+        ]
+      },
+      {
+        title: "Sustentabilidade e Meio Ambiente",
+        topics: [
+          {title:"ODS (Agenda 2030)", text:"17 Objetivos de Desenvolvimento Sustentavel da ONU, 169 metas. Principais: 1-Pobreza, 4-Educacao, 5-Igualdade de genero, 6-Agua, 7-Energia, 13-Clima, 16-Paz/Justica. Aprovados em 2015, prazo 2030."},
+          {title:"Problemas Ambientais", text:"Desmatamento da Amazonia, queimadas no Cerrado e Pantanal. Poluicao hidrica e atmosferica. Destinacao de residuos solidos. Politica Nacional de Residuos Solidos (Lei 12.305/2010): logistica reversa."},
+          {title:"Energia e Transicao Energetica", text:"Brasil: matriz eletrica predominantemente renovavel (hidro, eolica, solar). Transicao global: reducao de combustiveis fosseis, investimento em solar/eolica/hidrogenio verde. Mercado de creditos de carbono."}
+        ]
+      },
+      {
+        title: "Etica e Trabalho",
+        topics: [
+          {title:"Etica no Servico Publico", text:"O servidor deve agir com honestidade, imparcialidade, transparencia e respeito. Codigo de Etica (Decreto 1.171/94): dignidade, decoro, zelo, eficacia. Vedado: usar cargo para vantagem pessoal, prejudicar outros intencionalmente."},
+          {title:"Relacoes de Trabalho", text:"CLT: direitos trabalhistas (ferias, 13o, FGTS, INSS). Servico publico: regime estatutario, estabilidade apos estagio probatorio (3 anos). Assedio moral e sexual: condutas vedadas, canais de denuncia."}
+        ]
+      }
+    ]
+  },
+  4: {
+    title: "Informatica",
+    sections: [
+      {
+        title: "Conceitos Fundamentais",
+        topics: [
+          {title:"Hardware vs Software", text:"<strong>Hardware:</strong> parte fisica (teclado, mouse, monitor, CPU, RAM, HD). <strong>Software:</strong> parte logica (programas). Software de sistema (Windows), aplicativo (Word, Excel), utilitario (antivirus, compactador)."},
+          {title:"CPU, Memorias e Armazenamento", text:"<strong>CPU:</strong> 'cerebro' do computador, processa instrucoes. <strong>RAM:</strong> memoria volatil (perde dados ao desligar), rapida, armazena dados em uso. <strong>ROM:</strong> nao-volatil, contem firmware. <strong>HD:</strong> armazenamento magnetico. <strong>SSD:</strong> armazenamento em chips, mais rapido que HD."},
+          {title:"Dispositivos", text:"<strong>Entrada:</strong> teclado, mouse, scanner, microfone, webcam. <strong>Saida:</strong> monitor, impressora, caixa de som. <strong>Entrada e Saida:</strong> pendrive, HD externo, tela touchscreen, modem."}
+        ]
+      },
+      {
+        title: "Windows 10/11",
+        topics: [
+          {title:"Area de Trabalho", text:"Desktop com icones, Barra de Tarefas (em baixo), Menu Iniciar (canto esquerdo), Area de Notificacao (canto direito - relogio, rede, som). Lixeira: armazena arquivos excluidos (recuperaveis ate esvaziar)."},
+          {title:"Gerenciamento de Arquivos", text:"Explorador de Arquivos (Win+E). Pastas especiais: Documentos, Downloads, Imagens, Area de Trabalho. Extensoes: .docx (Word), .xlsx (Excel), .pptx (PowerPoint), .pdf, .txt, .jpg/.png (imagens), .mp4 (video)."},
+          {title:"Atalhos Essenciais", text:"<strong>Ctrl+C</strong> copiar | <strong>Ctrl+V</strong> colar | <strong>Ctrl+X</strong> recortar | <strong>Ctrl+Z</strong> desfazer | <strong>Ctrl+S</strong> salvar | <strong>Ctrl+A</strong> selecionar tudo | <strong>Ctrl+P</strong> imprimir | <strong>Alt+Tab</strong> alternar janelas | <strong>Alt+F4</strong> fechar programa | <strong>Win+L</strong> bloquear tela | <strong>Win+E</strong> explorador | <strong>Print Screen</strong> captura tela"}
+        ]
+      },
+      {
+        title: "Microsoft Word",
+        topics: [
+          {title:"Interface e Guias", text:"<strong>Pagina Inicial:</strong> fonte, paragrafo, estilos. <strong>Inserir:</strong> tabela, imagem, cabecalho/rodape, numero de pagina. <strong>Layout:</strong> margens, orientacao, colunas, tamanho do papel. <strong>Revisao:</strong> ortografia, controlar alteracoes, comentarios."},
+          {title:"Formatacao", text:"Fonte: tipo, tamanho, negrito (Ctrl+B), italico (Ctrl+I), sublinhado (Ctrl+U). Paragrafo: alinhamento (esquerda/centro/direita/justificado), espacamento (antes/depois/entre linhas), recuo. Ctrl+J = justificar."},
+          {title:"Configuracao de Pagina", text:"Guia Layout > Margens (Normal, Estreita, Larga, Personalizada). Orientacao: Retrato (vertical) ou Paisagem (horizontal). Tamanho: A4 (padrao no Brasil), Carta."}
+        ]
+      },
+      {
+        title: "Microsoft Excel",
+        topics: [
+          {title:"Estrutura", text:"<strong>Celula:</strong> interseccao de coluna (A,B,C...) e linha (1,2,3...). Endereco: A1, B3, Z99. <strong>Planilha:</strong> conjunto de celulas (abas na parte inferior). <strong>Pasta de trabalho:</strong> arquivo .xlsx que contem planilhas."},
+          {title:"Formulas e Funcoes", text:"Toda formula comeca com '='. <strong>SOMA(A1:A5)</strong>: soma intervalo. <strong>MEDIA(A1:A5)</strong>: media aritmetica. <strong>MAXIMO/MINIMO</strong>: maior/menor valor. <strong>SE(condicao;verdadeiro;falso)</strong>: condicional. <strong>CONT.NUM</strong>: conta celulas com numeros."},
+          {title:"Referencias", text:"<strong>Relativa (A1):</strong> muda ao copiar formula (se arrasta, ajusta). <strong>Absoluta ($A$1):</strong> fixa linha e coluna (nao muda ao copiar). <strong>Mista ($A1 ou A$1):</strong> fixa apenas coluna ou apenas linha. $ 'trava' o que vem depois."},
+          {title:"Graficos", text:"Selecione dados > Inserir > Grafico. Tipos: Colunas (comparacao), Linhas (evolucao), Pizza (proporcao de um todo), Barras (comparacao horizontal). Elementos: titulo, eixos, legenda, rotulos de dados."}
+        ]
+      },
+      {
+        title: "Microsoft PowerPoint",
+        topics: [
+          {title:"Conceitos", text:"Apresentacao = conjunto de slides. Cada slide pode conter: textos, imagens, formas, graficos, videos. Layouts predefinidos: Titulo, Titulo e Conteudo, Em Branco, Duas Colunas."},
+          {title:"Atalhos e Apresentacao", text:"<strong>F5:</strong> apresentar do inicio. <strong>Shift+F5:</strong> apresentar do slide atual. <strong>Esc:</strong> sair da apresentacao. Transicoes: efeitos entre slides. Animacoes: efeitos em elementos do slide (entrada, enfase, saida)."}
+        ]
+      },
+      {
+        title: "Internet e E-mail",
+        topics: [
+          {title:"Conceitos de Rede", text:"<strong>Internet:</strong> rede mundial publica. <strong>Intranet:</strong> rede privada de uma organizacao (acesso restrito). <strong>Extranet:</strong> parte da intranet disponibilizada para parceiros externos. Protocolo: conjunto de regras de comunicacao (HTTP, FTP, SMTP)."},
+          {title:"Navegadores e URLs", text:"Navegadores: Chrome, Firefox, Edge, Safari. URL (endereco): protocolo://dominio/caminho. <strong>HTTP:</strong> sem criptografia. <strong>HTTPS:</strong> com criptografia SSL/TLS (cadeado). Download: receber arquivo. Upload: enviar arquivo."},
+          {title:"E-mail", text:"<strong>Para:</strong> destinatario principal. <strong>CC</strong> (Copia Carbono): copia visivel a todos. <strong>CCO/BCC</strong> (Copia Oculta): copia que outros nao veem. <strong>Spam:</strong> mensagem indesejada em massa. <strong>Phishing:</strong> e-mail falso que imita empresa real para roubar dados."}
+        ]
+      },
+      {
+        title: "Seguranca da Informacao",
+        topics: [
+          {title:"Malwares", text:"<strong>Virus:</strong> precisa de arquivo hospedeiro, ativado pelo usuario. <strong>Worm:</strong> se replica sozinho pela rede. <strong>Trojan:</strong> se disfarca de programa util. <strong>Ransomware:</strong> criptografa arquivos e pede resgate. <strong>Spyware:</strong> espiona sem consentimento. <strong>Keylogger:</strong> registra teclas digitadas."},
+          {title:"Protecao", text:"<strong>Antivirus:</strong> detecta e remove malwares. <strong>Firewall:</strong> filtra trafego de rede (permite/bloqueia). <strong>Backup:</strong> copia de seguranca dos dados. Senhas seguras: 8+ caracteres, maiusculas + minusculas + numeros + simbolos."},
+          {title:"LGPD (Lei 13.709/2018)", text:"Protege dados pessoais. <strong>Titular:</strong> dono dos dados (voce). <strong>Controlador:</strong> decide como tratar dados. <strong>Operador:</strong> executa tratamento. <strong>ANPD:</strong> fiscaliza. Bases legais: consentimento, obrigacao legal, interesse legitimo. Direitos: acesso, correcao, exclusao, portabilidade."}
+        ]
+      },
+      {
+        title: "Redes de Computadores",
+        topics: [
+          {title:"Tipos de Rede", text:"<strong>LAN</strong> (Local): escritorio, escola, residencia. <strong>MAN</strong> (Metropolitana): cidade. <strong>WAN</strong> (Wide): paises, continentes (a internet e uma WAN). <strong>Wi-Fi:</strong> rede local sem fio (padrao IEEE 802.11)."},
+          {title:"Equipamentos", text:"<strong>Modem:</strong> converte sinal (analogico<->digital), conecta ao provedor. <strong>Roteador:</strong> direciona pacotes entre redes, distribui internet. <strong>Switch:</strong> conecta dispositivos na mesma rede local (mais eficiente que hub). <strong>Hub:</strong> igual ao switch mas envia dados para TODOS (obsoleto)."},
+          {title:"Enderecamento IP", text:"IP: identificador unico de um dispositivo na rede. IPv4: 4 octetos (192.168.1.1). IPv6: 8 grupos hexadecimais (mais enderecos). IP privado (rede local): 192.168.x.x / 10.x.x.x. IP publico: visivel na internet."}
+        ]
+      }
+    ]
+  },
+  5: {
+    title: "Conhecimentos Especificos (Escriturario)",
+    sections: [
+      {
+        title: "Administracao Publica - Principios",
+        topics: [
+          {title:"Principios LIMPE (Art. 37 CF/88)", text:"<strong>L</strong>egalidade: so fazer o que a lei permite. <strong>I</strong>mpessoalidade: tratar todos igualmente, sem favorecimento. <strong>M</strong>oralidade: agir com etica, honestidade e boa-fe. <strong>P</strong>ublicidade: transparencia dos atos (publicacao oficial). <strong>E</strong>ficiencia: melhor resultado com menor custo (EC 19/1998)."},
+          {title:"Poderes da Administracao", text:"<strong>Vinculado:</strong> sem margem de escolha (lei determina tudo). <strong>Discricionario:</strong> margem de conveniencia e oportunidade. <strong>Hierarquico:</strong> organizar, delegar, avocar, fiscalizar. <strong>Disciplinar:</strong> apurar e punir infracoes. <strong>Regulamentar:</strong> expedir decretos. <strong>De Policia:</strong> restringir direitos em prol do coletivo."},
+          {title:"Atos Administrativos", text:"Elementos: competencia, finalidade, forma, motivo, objeto. Atributos: presuncao de legitimidade, imperatividade, autoexecutoriedade, tipicidade. <strong>Anulacao:</strong> vicio de legalidade, efeito retroativo (ex tunc). <strong>Revogacao:</strong> inconveniente/inoportuno, efeito futuro (ex nunc). Sumula 473 STF: autotutela."}
+        ]
+      },
+      {
+        title: "Organizacao Administrativa",
+        topics: [
+          {title:"Administracao Direta e Indireta", text:"<strong>Direta:</strong> orgaos sem personalidade juridica propria (ministerios, secretarias). <strong>Indireta:</strong> entidades com personalidade propria — Autarquias (INSS, IBAMA), Fundacoes (FUNAI), Empresas Publicas (Correios, CEF), Sociedades de Economia Mista (Petrobras, BB)."},
+          {title:"Funcoes Administrativas (PODC)", text:"<strong>P</strong>lanejar: definir objetivos e estrategias. <strong>O</strong>rganizar: alocar recursos, definir estrutura. <strong>D</strong>irigir: liderar, motivar, comunicar equipes. <strong>C</strong>ontrolar: medir resultados, corrigir desvios. Ciclo continuo proposto por Fayol (Teoria Classica)."},
+          {title:"Atendimento ao Publico", text:"Principios: cortesia (urbanidade), presteza, eficiencia, isonomia (tratar todos igualmente). O cidadao e o destinatario final do servico publico. Trabalho em equipe: cooperacao, comunicacao, respeito, objetivos compartilhados."}
+        ]
+      },
+      {
+        title: "Arquivologia e Gestao de Documentos",
+        topics: [
+          {title:"Teoria das 3 Idades", text:"<strong>1a Idade - Corrente:</strong> uso frequente, no setor de trabalho. <strong>2a Idade - Intermediario:</strong> pouca consulta, aguarda destinacao final (eliminacao ou permanente). <strong>3a Idade - Permanente:</strong> valor historico/probatorio, NUNCA pode ser eliminado. Tabela de Temporalidade define os prazos de cada fase."},
+          {title:"Classificacao de Documentos", text:"Por genero: textuais, cartograficos, iconograficos, filmograficos, sonoros, informaticos. Por especie: ata, oficio, memorando, relatorio, certidao, atestado. Por natureza: ostensivos (acesso livre) ou sigilosos (reservado, secreto, ultrassecreto)."},
+          {title:"Metodos de Arquivamento", text:"<strong>Alfabetico:</strong> por nome (direto, sem indice). <strong>Numerico:</strong> por codigo/numero (indireto, precisa de indice). <strong>Cronologico:</strong> por data. <strong>Geografico:</strong> por localidade. <strong>Ideografico (Assunto):</strong> por tema/assunto. Metodo direto = busca sem indice auxiliar."},
+          {title:"Protocolo", text:"Atividades: recebimento, registro (numero unico + data), autuacao (abertura de processo), classificacao, distribuicao/movimentacao, controle de tramitacao, expedicao. Garante rastreabilidade e controle de documentos na organizacao."},
+          {title:"Conservacao e Preservacao", text:"Fatores de deterioracao: umidade, temperatura, luz, poeira, insetos (bibliofagos), manuseio incorreto. Medidas: climatizacao, higienizacao, acondicionamento adequado, restauracao. Microfilmagem e digitalizacao: preservam originais."}
+        ]
+      },
+      {
+        title: "Redacao Oficial",
+        topics: [
+          {title:"Principios", text:"<strong>Impessoalidade:</strong> nao usar 1a pessoa, tom institucional. <strong>Clareza:</strong> sem ambiguidade. <strong>Concisao:</strong> maximo de informacao com minimo de palavras. <strong>Formalidade:</strong> padrao culto da lingua. <strong>Uniformidade:</strong> seguir o padrao (Manual de Redacao da Presidencia)."},
+          {title:"Tipos de Documentos", text:"<strong>Oficio:</strong> comunicacao EXTERNA entre orgaos ou orgao-particular. <strong>Memorando:</strong> comunicacao INTERNA (mesmo orgao, entre setores). <strong>Requerimento:</strong> pedido do cidadao a autoridade publica. <strong>Relatorio:</strong> exposicao de atividades/resultados. <strong>Ata:</strong> registro fiel de reuniao."},
+          {title:"Pronomes de Tratamento", text:"<strong>Vossa Excelencia:</strong> Presidente, Ministros, Governadores, Prefeitos, Juizes, Parlamentares. <strong>Vossa Senhoria:</strong> demais autoridades e particulares. <strong>Vossa Magnificencia:</strong> Reitores. Abreviatura: V. Exa., V. Sa. Concordancia: 3a pessoa (Vossa Excelencia DETERMINOU)."}
+        ]
+      },
+      {
+        title: "Legislacao Basica",
+        topics: [
+          {title:"Lei 9.784/1999 (Processo Administrativo)", text:"Regula o processo administrativo no ambito federal. Principios: legalidade, finalidade, motivacao, razoabilidade, proporcionalidade, moralidade, ampla defesa, contraditorio, seguranca juridica, interesse publico, eficiencia. Prazos: decisao em 30+30 dias, recurso em 10 dias, parecer em 15 dias."},
+          {title:"Lei de Acesso a Informacao (12.527/2011)", text:"Regula acesso a informacoes publicas. <strong>Transparencia ativa:</strong> orgao publica sem ser pedido. <strong>Transparencia passiva:</strong> mediante pedido do cidadao. Prazo: 20 dias + 10 (prorrogacao justificada). Sigilo: reservado (5 anos), secreto (15 anos), ultrassecreto (25 anos). Informacao pessoal: 100 anos."},
+          {title:"Direitos e Deveres do Servidor", text:"<strong>Deveres:</strong> assiduidade, pontualidade, urbanidade, lealdade, obediencia, sigilo funcional, zelo. <strong>Proibicoes:</strong> receber propina/comissao, usar cargo para proveito pessoal, exercer comercio irregular, atuar como procurador junto a reparticao. Penalidades: advertencia, suspensao, demissao."},
+          {title:"Etica no Servico Publico", text:"Decreto 1.171/1994: Codigo de Etica. Dignidade, decoro, zelo, eficacia. O servidor nao deve: usar o cargo para intimidar, ser desidioso (negligente), permitir perseguicoes. A funcao publica e extensao da vida particular — a conduta do servidor reflete na imagem da Administracao."}
+        ]
+      }
+    ]
+  }
+};
+
+function renderStudyMenu() {
+  const grid = document.getElementById('studyBlocksGrid');
+  let html = '';
+  for (let i = 1; i <= 5; i++) {
+    const content = STUDY_CONTENT[i];
+    const topicCount = content.sections.reduce((sum, s) => sum + s.topics.length, 0);
+    html += `
+      <div class="study-block-card" onclick="navigate('#/study/${i}')">
+        <div class="block-icon">${getBlockIcon(i)}</div>
+        <div class="block-info">
+          <div class="block-name">${content.title}</div>
+          <div class="block-meta">${content.sections.length} secoes, ${topicCount} topicos</div>
+        </div>
+      </div>`;
+  }
+  grid.innerHTML = html;
+}
+
+function renderStudyContent(blockId) {
+  studyBlockId = blockId;
+  const content = STUDY_CONTENT[blockId];
+  if (!content) { navigate('#/study'); return; }
+
+  let html = '';
+  for (const section of content.sections) {
+    html += `<div class="study-section">`;
+    html += `<h3 class="study-section-title">${section.title}</h3>`;
+    for (const topic of section.topics) {
+      html += `
+        <div class="study-topic">
+          <div class="study-topic-title">${topic.title}</div>
+          <div class="study-text">${topic.text}</div>
+        </div>`;
+    }
+    html += `</div>`;
+  }
+
+  document.getElementById('studyContentArea').innerHTML = html;
+  window.scrollTo({ top: 0 });
+}
+
+function goToQuizFromStudy() {
+  if (studyBlockId) navigate(`#/quiz/${studyBlockId}`);
 }
 
 // ====== INIT ======
