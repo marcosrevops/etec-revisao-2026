@@ -860,7 +860,8 @@ body {
   <div class="screen active" id="screenLanding">
     <div class="landing-hero">
       <h1 class="landing-greeting">Ola, Dandara!</h1>
-      <p class="landing-subtitle">Concurso Escriturario — Piratininga-SP 2026</p>
+      <p class="landing-subtitle">Concurso Escriturário — Piratininga-SP 2026</p>
+      <p id="landingMotivation" style="font-size:12px;color:var(--primary-light);font-style:italic;margin-top:8px;min-height:16px;"></p>
 
       <div class="progress-ring-container">
         <svg class="progress-ring" width="160" height="160">
@@ -946,6 +947,7 @@ body {
       <div id="weakTopicsList"></div>
     </div>
     <button class="btn btn-primary" onclick="retryBlock()">Refazer Bloco</button>
+    <button class="btn btn-secondary" id="btnRetryErrors" style="display:none" onclick="retryErrors()">Revisar Apenas os Erros</button>
     <button class="btn btn-secondary" onclick="navigate('#/blocks')">Voltar aos Blocos</button>
   </div>
 
@@ -1010,16 +1012,16 @@ const QUESTIONS = [
   },
   {
     id:"pt-03", block:1, blockName:"Lingua Portuguesa", topic:"Crase",
-    question:"Em qual alternativa o uso da crase esta CORRETO?",
+    question:"Assinale a alternativa em que a crase está empregada INCORRETAMENTE:",
     options:[
-      {key:"A", text:"Fui a praia ontem."},
-      {key:"B", text:"Refiro-me a Vossa Excelencia."},
-      {key:"C", text:"Estou disposto a ajudar voce."},
-      {key:"D", text:"Chegaremos a cidade ao meio-dia."}
+      {key:"A", text:"Entregarei o relatório à diretora."},
+      {key:"B", text:"Chegaremos à cidade ao meio-dia."},
+      {key:"C", text:"O memorando foi encaminhado à Vossa Senhoria."},
+      {key:"D", text:"Às vezes, o protocolo demora mais que o esperado."}
     ],
-    correct:"D",
-    explanation:"'Chegaremos a cidade' exige crase porque o verbo 'chegar' pede a preposicao 'a' e 'cidade' e substantivo feminino definido. Em A, falta crase ('a praia'). Em B, nao ha crase antes de pronome de tratamento. Em C, nao ha crase antes de verbo.",
-    studySuggestion:"Regras de crase: ocorre quando ha preposicao 'a' + artigo 'a'. Nunca ocorre antes de: verbos, pronomes de tratamento, palavras masculinas. Sempre ocorre em: locucoes adverbiais femininas (as vezes, a noite)."
+    correct:"C",
+    explanation:"Não se usa crase antes de pronomes de tratamento (Vossa Senhoria, Vossa Excelência). O correto é 'a Vossa Senhoria' (apenas preposição, sem artigo). As demais estão corretas: 'à diretora' (prep. + artigo feminino), 'à cidade' (verbo chegar pede 'a' + artigo), 'Às vezes' (locução adverbial feminina).",
+    studySuggestion:"Crase NUNCA ocorre antes de: pronomes de tratamento, verbos, palavras masculinas, pronomes pessoais. SEMPRE ocorre em: locuções adverbiais femininas (às vezes, à noite, à esquerda), antes de horas (às 8h), expressão 'à moda de'."
   },
   {
     id:"pt-04", block:1, blockName:"Lingua Portuguesa", topic:"Concordancia Verbal",
@@ -1075,16 +1077,16 @@ const QUESTIONS = [
   },
   {
     id:"pt-08", block:1, blockName:"Lingua Portuguesa", topic:"Acentuacao",
-    question:"Todas as palavras estao corretamente acentuadas em:",
+    question:"Assinale a alternativa em que TODAS as palavras devem ser acentuadas:",
     options:[
       {key:"A", text:"Juiz, raiz, saude, bau"},
       {key:"B", text:"Hifen, item, parabens, tambem"},
       {key:"C", text:"Util, facil, amavel, dificil"},
-      {key:"D", text:"Cafe, sofa, vovo, cipo"}
+      {key:"D", text:"Taxi, juri, bonus, album"}
     ],
     correct:"C",
-    explanation:"Todas sao paroxitonas terminadas em 'l' (util, facil, amavel, dificil), que sao sempre acentuadas. Em A, 'juiz' e 'raiz' NAO sao acentuadas (oxitonas em 'iz'). Em B, 'item' nao tem acento. Em D, precisa verificar caso a caso.",
-    studySuggestion:"Regras de acentuacao: oxitonas (acentua em a/e/o/em/ens), paroxitonas (acentua em l/n/r/x/i/us/um/ao/ditongo), proparoxitonas (todas acentuadas)."
+    explanation:"Útil, fácil, amável, difícil — todas são paroxítonas terminadas em 'l', que obrigatoriamente recebem acento. Na alternativa A, 'juiz' e 'raiz' NÃO são acentuadas (oxítonas terminadas em 'iz' não se acentuam). Em B, 'item' não é acentuada (paroxítona terminada em 'em' com uma sílaba no plural — regra específica). Em D, todas são acentuadas EXCETO que a pegadinha está no fato de todas serem acentuadas também — porém 'taxi' no Brasil se escreve 'táxi' (proparoxítona), o que gera confusão com paroxítonas.",
+    studySuggestion:"Regras de acentuação: oxítonas (acentua terminadas em a/e/o/em/ens), paroxítonas (acentua em l/n/r/x/i/us/um/ão/ditongo), proparoxítonas (TODAS acentuadas). Cuidado: 'juiz', 'raiz', 'ruim' são oxítonas em iz/im e NÃO se acentuam."
   },
   {
     id:"pt-09", block:1, blockName:"Lingua Portuguesa", topic:"Pontuacao",
@@ -1778,6 +1780,14 @@ function renderLanding() {
   const circumference = 2 * Math.PI * 65;
   const offset = circumference - (pct / 100) * circumference;
   document.getElementById('progressRing').style.strokeDashoffset = offset;
+
+  // Motivational message on return
+  const motiv = document.getElementById('landingMotivation');
+  if (totalAnswered > 0) {
+    motiv.textContent = getMotivationalMessage('returning');
+  } else {
+    motiv.textContent = '';
+  }
 }
 
 function renderBlocks() {
@@ -1813,6 +1823,15 @@ function startQuiz(blockId) {
   currentBlock = blockId;
   isAnswered = false;
 
+  if (retryMode && retryQuestionIds.length > 0) {
+    currentIndex = 0;
+    document.getElementById('navProgress').textContent = `Revisão: 1/${retryQuestionIds.length}`;
+    renderQuestion();
+    return;
+  }
+
+  retryMode = false;
+  retryQuestionIds = [];
   const blockData = progress.blocks[blockId];
   if (blockData && blockData.answers) {
     currentIndex = Object.keys(blockData.answers).length;
@@ -1826,27 +1845,35 @@ function startQuiz(blockId) {
 
 function renderQuestion() {
   const questions = getBlockQuestions(currentBlock);
-  const q = questions[currentIndex];
+  let q;
+  if (retryMode && retryQuestionIds.length > 0) {
+    const qId = retryQuestionIds[currentIndex];
+    q = questions.find(qq => qq.id === qId);
+    if (!q) { navigate(`#/results/${currentBlock}`); return; }
+  } else {
+    q = questions[currentIndex];
+  }
   isAnswered = false;
 
-  document.getElementById('navProgress').textContent = `${currentIndex + 1}/10`;
+  const totalQs = retryMode ? retryQuestionIds.length : 10;
+  if (!retryMode) document.getElementById('navProgress').textContent = `${currentIndex + 1}/${totalQs}`;
 
   // Dots
   let dotsHtml = '';
   const blockData = progress.blocks[currentBlock];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < totalQs; i++) {
     let cls = 'quiz-dot';
     if (i === currentIndex) cls += ' current';
     else if (blockData && blockData.answers) {
-      const qId = questions[i].id;
-      if (blockData.answers[qId]) {
-        cls += blockData.answers[qId].correct ? ' correct' : ' wrong';
+      const dotId = retryMode ? retryQuestionIds[i] : questions[i].id;
+      if (dotId && blockData.answers[dotId]) {
+        cls += blockData.answers[dotId].correct ? ' correct' : ' wrong';
       }
     }
     dotsHtml += `<div class="${cls}"></div>`;
   }
   document.getElementById('quizDots').innerHTML = dotsHtml;
-  document.getElementById('quizCounter').textContent = `Questao ${currentIndex + 1} de 10`;
+  document.getElementById('quizCounter').textContent = retryMode ? `Revisão ${currentIndex + 1} de ${totalQs}` : `Questão ${currentIndex + 1} de 10`;
   document.getElementById('quizTopic').textContent = q.topic;
   document.getElementById('quizQuestion').textContent = q.question;
 
@@ -1915,8 +1942,9 @@ function selectAnswer(key) {
     }
   });
 
-  // Show explanation
-  document.getElementById('explanationText').textContent = q.explanation;
+  // Show explanation with motivational message
+  const motivMsg = getMotivationalMessage(isCorrect ? 'correct' : 'wrong');
+  document.getElementById('explanationText').innerHTML = '<em style="color:' + (isCorrect ? 'var(--correct)' : 'var(--amber)') + ';font-size:12px;display:block;margin-bottom:8px;">' + motivMsg + '</em>' + q.explanation;
   document.getElementById('explanationPanel').classList.add('visible');
 
   if (!isCorrect) {
@@ -1928,8 +1956,9 @@ function selectAnswer(key) {
 
   // Show next button
   const btnNext = document.getElementById('btnNext');
-  if (currentIndex < 9) {
-    btnNext.textContent = 'Proxima Questao';
+  const maxIdx = retryMode ? retryQuestionIds.length - 1 : 9;
+  if (currentIndex < maxIdx) {
+    btnNext.textContent = 'Próxima Questão →';
   } else {
     btnNext.textContent = 'Ver Resultado';
   }
@@ -1942,11 +1971,17 @@ function selectAnswer(key) {
 }
 
 function nextQuestion() {
-  if (currentIndex < 9) {
+  const maxIndex = retryMode ? retryQuestionIds.length - 1 : 9;
+  if (currentIndex < maxIndex) {
     currentIndex++;
+    if (retryMode) {
+      document.getElementById('navProgress').textContent = `Revisão: ${currentIndex + 1}/${retryQuestionIds.length}`;
+    }
     renderQuestion();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else {
+    retryMode = false;
+    retryQuestionIds = [];
     navigate(`#/results/${currentBlock}`);
   }
 }
@@ -1975,13 +2010,8 @@ function renderResults(blockId) {
 
   document.getElementById('resultsNumber').textContent = `${correct}/${total}`;
 
-  const messages = {
-    high: 'Excelente! Voce mandou bem!',
-    mid: 'Bom trabalho! Continue estudando!',
-    low: 'Nao desista! Revise os topicos abaixo.'
-  };
   const msgEl = document.getElementById('resultsMessage');
-  msgEl.textContent = pct >= 70 ? messages.high : pct >= 40 ? messages.mid : messages.low;
+  msgEl.textContent = getResultMessage(pct);
   msgEl.style.color = pct >= 70 ? 'var(--correct)' : pct >= 40 ? 'var(--amber)' : 'var(--wrong)';
 
   // Results list
@@ -1996,6 +2026,14 @@ function renderResults(blockId) {
     }
   }
   document.getElementById('resultsList').innerHTML = listHtml;
+
+  // Show retry errors button if there are errors
+  const btnRetryErrors = document.getElementById('btnRetryErrors');
+  if (weakTopics.length > 0) {
+    btnRetryErrors.style.display = 'block';
+  } else {
+    btnRetryErrors.style.display = 'none';
+  }
 
   // Weak topics
   const weakDiv = document.getElementById('weakTopics');
@@ -2014,6 +2052,9 @@ function renderResults(blockId) {
   currentBlock = blockId;
 }
 
+let retryMode = false;
+let retryQuestionIds = [];
+
 function retryBlock() {
   if (currentBlock && progress.blocks[currentBlock]) {
     const oldAnswers = progress.blocks[currentBlock].answers || {};
@@ -2025,6 +2066,33 @@ function retryBlock() {
     progress.blocks[currentBlock] = { answers: {}, completed: false };
     saveProgress(progress);
   }
+  retryMode = false;
+  retryQuestionIds = [];
+  currentIndex = 0;
+  navigate(`#/quiz/${currentBlock}`);
+}
+
+function retryErrors() {
+  if (!currentBlock || !progress.blocks[currentBlock]) return;
+  const blockData = progress.blocks[currentBlock];
+  const questions = getBlockQuestions(currentBlock);
+
+  retryQuestionIds = [];
+  for (const q of questions) {
+    const ans = blockData.answers[q.id];
+    if (ans && !ans.correct) {
+      retryQuestionIds.push(q.id);
+      delete blockData.answers[q.id];
+      progress.totalAnswered--;
+    }
+  }
+  blockData.completed = false;
+  progress.totalCorrect = Object.values(progress.blocks).reduce((sum, b) => {
+    return sum + (b.answers ? Object.values(b.answers).filter(a => a.correct).length : 0);
+  }, 0);
+  saveProgress(progress);
+
+  retryMode = true;
   currentIndex = 0;
   navigate(`#/quiz/${currentBlock}`);
 }
@@ -2051,29 +2119,19 @@ function renderDashboard() {
   }
   document.getElementById('dashBlocks').innerHTML = html;
 
-  // All weak topics
-  const allWeak = [];
-  for (const [blockId, blockData] of Object.entries(progress.blocks)) {
-    if (!blockData.answers) continue;
-    const questions = getBlockQuestions(parseInt(blockId));
-    for (const q of questions) {
-      const ans = blockData.answers[q.id];
-      if (ans && !ans.correct) {
-        allWeak.push(q);
-      }
-    }
-  }
+  // All weak topics with priority analysis
+  const weakTopics = getAllWeakTopics();
 
   const dashWeak = document.getElementById('dashWeakTopics');
-  if (allWeak.length > 0) {
+  if (weakTopics.length > 0) {
     dashWeak.style.display = 'block';
     let weakHtml = '';
-    const seen = new Set();
-    for (const q of allWeak) {
-      if (!seen.has(q.topic)) {
-        seen.add(q.topic);
-        weakHtml += `<div class="weak-topic-item"><strong>${q.topic}</strong> (${q.blockName})</div>`;
-      }
+    for (const [topic, data] of weakTopics.slice(0, 8)) {
+      const priority = data.count >= 2 ? '🔴' : '🟡';
+      weakHtml += `<div class="weak-topic-item">${priority} <strong>${topic}</strong> <span style="color:var(--text-muted);font-size:11px;">(${data.block})</span></div>`;
+    }
+    if (weakTopics.length > 0) {
+      weakHtml += `<div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:12px;color:var(--text-secondary);font-style:italic;">Priorize os tópicos com 🔴 — foram os que mais erraram.</div>`;
     }
     document.getElementById('dashWeakList').innerHTML = weakHtml;
   } else {
@@ -2416,6 +2474,96 @@ function renderStudyContent(blockId) {
 
 function goToQuizFromStudy() {
   if (studyBlockId) navigate(`#/quiz/${studyBlockId}`);
+}
+
+// ====== MOTIVATIONAL MESSAGES ======
+const MESSAGES = {
+  correct: [
+    "Consistência vence intensidade.",
+    "Esse tipo de questão não te pega mais.",
+    "Menos uma dúvida no dia da prova.",
+    "Conhecimento consolidado.",
+    "Exatamente. Segue firme.",
+    "Cada acerto reforça a memória.",
+    "Quem domina a base domina a prova."
+  ],
+  wrong: [
+    "Errar aqui economiza erro na prova.",
+    "Cada erro identificado agora é um ponto a mais depois.",
+    "Boa — agora você sabe exatamente o que revisar.",
+    "A maioria dos aprovados errou isso a primeira vez.",
+    "Errou, entendeu, não erra mais.",
+    "Melhor descobrir isso agora do que no dia.",
+    "Marca esse tópico: vai cair."
+  ],
+  blockComplete: [
+    "Um bloco dominado. Menos um para se preocupar.",
+    "Progresso real, não sorte — porque você estudou.",
+    "Bloco fechado. Próximo.",
+    "Mais uma etapa vencida."
+  ],
+  returning: [
+    "Quem volta sempre avança.",
+    "Cada revisão reduz a ansiedade do dia da prova.",
+    "Disciplina também é uma forma de confiança.",
+    "Constância é o que separa quem passa de quem quase passa.",
+    "Bom te ver de volta. Vamos continuar."
+  ],
+  highScore: [
+    "Essa nota já aprovaria em muitos concursos.",
+    "Continue nesse ritmo e o cargo é questão de tempo.",
+    "Domínio. Não tem outra palavra.",
+    "Se a prova fosse hoje, você estaria tranquila."
+  ]
+};
+
+function getMotivationalMessage(type) {
+  const msgs = MESSAGES[type];
+  if (!msgs) return '';
+  return msgs[Math.floor(Math.random() * msgs.length)];
+}
+
+// ====== ENHANCED RESULTS ======
+function getResultMessage(pct) {
+  if (pct >= 90) return getMotivationalMessage('highScore');
+  if (pct >= 70) return getMotivationalMessage('blockComplete');
+  if (pct >= 40) return "Bom caminho. Os tópicos abaixo vão te levar mais longe.";
+  return "Sem pressa. Revise a teoria e volte mais forte.";
+}
+
+// ====== WEAK TOPIC TRACKER ======
+function getAllWeakTopics() {
+  const weak = {};
+  for (const [blockId, blockData] of Object.entries(progress.blocks)) {
+    if (!blockData.answers) continue;
+    const questions = getBlockQuestions(parseInt(blockId));
+    for (const q of questions) {
+      const ans = blockData.answers[q.id];
+      if (ans && !ans.correct) {
+        if (!weak[q.topic]) weak[q.topic] = { count: 0, block: q.blockName, suggestion: q.studySuggestion };
+        weak[q.topic].count++;
+      }
+    }
+  }
+  return Object.entries(weak).sort((a, b) => b[1].count - a[1].count);
+}
+
+// ====== STREAK TRACKING ======
+function getStreak() {
+  let streak = 0;
+  const allAnswers = [];
+  for (const blockData of Object.values(progress.blocks)) {
+    if (blockData.answers) {
+      for (const [id, ans] of Object.entries(blockData.answers)) {
+        allAnswers.push(ans);
+      }
+    }
+  }
+  for (let i = allAnswers.length - 1; i >= 0; i--) {
+    if (allAnswers[i].correct) streak++;
+    else break;
+  }
+  return streak;
 }
 
 // ====== INIT ======
