@@ -2,124 +2,1916 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Revisão Intensiva ETEC 2026</title>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Quiz Escriturário — Piratininga-SP 2026</title>
+<meta name="description" content="Quiz interativo para o Concurso de Escriturário da Prefeitura de Piratininga-SP 2026. 50 questões com feedback em tempo real.">
+<meta name="theme-color" content="#0f0f1a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#0f0f1a;color:#e2e8f0;line-height:1.7;font-size:14px}
-.container{max-width:900px;margin:0 auto;padding:40px 50px}
-/* COVER */
-.cover{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(135deg,#0f0f1a 0%,#1a1a3e 50%,#2d1b69 100%);page-break-after:always;padding:60px 40px}
-.cover .badge{background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:8px 24px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;display:inline-block;margin-bottom:30px}
-.cover h1{font-size:52px;font-weight:900;background:linear-gradient(135deg,#fff,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:16px}
-.cover .subtitle{font-size:18px;color:#a5b4fc;font-weight:400;margin-bottom:40px}
-.cover .meta{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-bottom:40px}
-.cover .meta-item{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px 24px;min-width:180px}
-.cover .meta-item .label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#94a3b8;margin-bottom:4px}
-.cover .meta-item .value{font-size:16px;font-weight:700;color:#e2e8f0}
-.cover .blocks{display:flex;gap:16px;margin-top:20px;flex-wrap:wrap;justify-content:center}
-.cover .block{background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);border-radius:10px;padding:12px 20px;font-size:13px;font-weight:600;color:#a5b4fc}
-/* CONTENT */
-#content h1{font-size:32px;font-weight:900;margin:60px 0 10px;padding:20px 0 12px;border-bottom:3px solid #6366f1;background:linear-gradient(135deg,#fff,#a5b4fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;page-break-before:always}
-#content h1:first-child{page-break-before:avoid}
-#content h2{font-size:22px;font-weight:800;color:#a5b4fc;margin:40px 0 12px;padding-bottom:8px;border-bottom:1px solid rgba(99,102,241,0.3)}
-#content h3{font-size:16px;font-weight:700;color:#c4b5fd;margin:24px 0 8px}
-#content p{margin:8px 0;color:#cbd5e1}
-#content strong{color:#f1f5f9;font-weight:700}
-#content ul,#content ol{margin:8px 0 8px 24px;color:#cbd5e1}
-#content li{margin:4px 0}
-#content hr{border:none;border-top:1px solid rgba(99,102,241,0.2);margin:32px 0}
-/* TABLES */
-#content table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px;border-radius:8px;overflow:hidden}
-#content thead{background:linear-gradient(135deg,#312e81,#4338ca)}
-#content th{padding:10px 14px;text-align:left;font-weight:700;color:#e0e7ff;font-size:12px;text-transform:uppercase;letter-spacing:0.5px}
-#content td{padding:9px 14px;border-bottom:1px solid rgba(99,102,241,0.12);color:#cbd5e1}
-#content tbody tr:nth-child(even){background:rgba(99,102,241,0.05)}
-#content tbody tr:hover{background:rgba(99,102,241,0.1)}
-/* BLOCKQUOTES (pegadinhas) */
-#content blockquote{margin:16px 0;padding:14px 18px;border-left:4px solid #f59e0b;background:rgba(245,158,11,0.08);border-radius:0 8px 8px 0;font-size:13px}
-#content blockquote strong{color:#fbbf24}
-#content blockquote p{color:#d4b896;margin:4px 0}
-/* CODE */
-#content code{background:rgba(99,102,241,0.15);color:#a5b4fc;padding:2px 6px;border-radius:4px;font-size:13px;font-family:'Fira Code',monospace}
-#content pre{background:rgba(15,15,26,0.8);border:1px solid rgba(99,102,241,0.2);border-radius:8px;padding:16px;margin:12px 0;overflow-x:auto}
-#content pre code{background:none;padding:0}
-/* MOBILE */
-@media(max-width:768px){
-  .container{padding:20px 16px}
-  .cover{padding:40px 20px;min-height:auto}
-  .cover h1{font-size:32px}
-  .cover .subtitle{font-size:14px;margin-bottom:24px}
-  .cover .meta{flex-direction:column;gap:10px;align-items:center}
-  .cover .meta-item{min-width:auto;width:100%;max-width:300px;padding:12px 16px}
-  .cover .blocks{flex-direction:column;align-items:center}
-  .cover .block{width:100%;max-width:300px;text-align:center}
-  #content h1{font-size:24px;margin:40px 0 8px}
-  #content h2{font-size:18px;margin:28px 0 10px}
-  #content h3{font-size:15px}
-  #content table{font-size:11px;display:block;overflow-x:auto;white-space:nowrap}
-  #content th,#content td{padding:6px 8px}
-  #content blockquote{padding:10px 12px;font-size:12px}
+:root {
+  --bg: #0f0f1a;
+  --bg-card: #1a1a2e;
+  --bg-card-hover: #222240;
+  --primary: #6366f1;
+  --primary-light: #a5b4fc;
+  --purple: #8b5cf6;
+  --correct: #10b981;
+  --correct-bg: rgba(16, 185, 129, 0.12);
+  --wrong: #ef4444;
+  --wrong-bg: rgba(239, 68, 68, 0.12);
+  --amber: #f59e0b;
+  --amber-bg: rgba(245, 158, 11, 0.08);
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border: rgba(99, 102, 241, 0.2);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.3);
 }
-/* PRINT */
-@media print{
-  body{background:#fff;color:#1a1a2e;font-size:11px;line-height:1.5}
-  .cover{background:#fff!important;min-height:auto;padding:80px 40px;border-bottom:4px solid #4338ca}
-  .cover .badge{background:#4338ca;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .cover h1{-webkit-text-fill-color:#1a1a2e;font-size:40px}
-  .cover .subtitle{color:#4338ca}
-  .cover .meta-item{border-color:#ddd;background:#f8f8ff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .cover .meta-item .label{color:#666}
-  .cover .meta-item .value{color:#1a1a2e}
-  .cover .block{background:#f0f0ff;border-color:#c7d2fe;color:#4338ca;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .container{padding:20px 40px}
-  #content h1{-webkit-text-fill-color:#1a1a2e;color:#1a1a2e;border-bottom-color:#4338ca;font-size:24px;margin-top:30px;page-break-before:always}
-  #content h1:first-child{page-break-before:avoid}
-  #content h2{color:#4338ca;font-size:18px;border-bottom-color:#c7d2fe}
-  #content h3{color:#5b21b6;font-size:14px}
-  #content p,#content li,#content td{color:#333}
-  #content strong{color:#111}
-  #content thead{background:#4338ca!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  #content th{color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  #content tbody tr:nth-child(even){background:#f5f3ff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  #content blockquote{border-left-color:#f59e0b;background:#fffbeb!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  #content blockquote strong{color:#b45309}
-  #content blockquote p{color:#78350f}
-  #content code{background:#f0f0ff;color:#4338ca}
-  #content pre{background:#f8f8ff;border-color:#e0e0f0}
-  @page{margin:15mm 12mm;size:A4}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100dvh;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px 16px;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ====== NAV ====== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 15, 26, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 12px 16px;
+  margin: -20px -16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-light);
+}
+
+.nav-back {
+  background: none;
+  border: none;
+  color: var(--primary-light);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s;
+}
+
+.nav-back:hover { background: rgba(99,102,241,0.1); }
+
+.nav-progress {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ====== SCREENS ====== */
+.screen { display: none; flex: 1; flex-direction: column; }
+.screen.active { display: flex; }
+
+/* ====== LANDING ====== */
+.landing-hero {
+  text-align: center;
+  padding: 40px 0 30px;
+}
+
+.landing-greeting {
+  font-size: 28px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #fff, #c4b5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+
+.landing-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+}
+
+.progress-ring-container {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 24px;
+}
+
+.progress-ring {
+  transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+  fill: none;
+  stroke: rgba(99,102,241,0.15);
+  stroke-width: 10;
+}
+
+.progress-ring-fill {
+  fill: none;
+  stroke: url(#gradient);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s ease;
+}
+
+.progress-ring-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.progress-ring-pct {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.progress-ring-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.landing-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 10px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.stat-label {
+  font-size: 10px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 16px 24px;
+  border: none;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--purple));
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(99,102,241,0.3);
+}
+
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(99,102,241,0.4); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-secondary {
+  background: var(--bg-card);
+  color: var(--primary-light);
+  border: 1px solid var(--border);
+  margin-top: 12px;
+}
+
+.btn-secondary:hover { background: var(--bg-card-hover); }
+
+.btn-danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--wrong);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  margin-top: 12px;
+}
+
+/* ====== BLOCK SELECTION ====== */
+.blocks-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.block-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.block-card:hover { background: var(--bg-card-hover); transform: translateY(-1px); }
+.block-card:active { transform: translateY(0); }
+
+.block-card.completed { border-color: var(--correct); }
+.block-card.in-progress { border-color: var(--amber); }
+
+.block-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  background: rgba(99,102,241,0.15);
+}
+
+.block-info { flex: 1; min-width: 0; }
+
+.block-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.block-meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.block-progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(99,102,241,0.15);
+  border-radius: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.block-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--purple));
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* ====== QUIZ ====== */
+.quiz-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.quiz-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.quiz-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(99,102,241,0.2);
+  transition: all 0.3s;
+}
+
+.quiz-dot.answered { background: var(--primary); }
+.quiz-dot.current { background: var(--primary-light); transform: scale(1.3); }
+.quiz-dot.correct { background: var(--correct); }
+.quiz-dot.wrong { background: var(--wrong); }
+
+.quiz-counter {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.quiz-topic {
+  display: inline-block;
+  background: rgba(99,102,241,0.15);
+  color: var(--primary-light);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.quiz-question {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.5;
+  margin-bottom: 24px;
+  padding: 20px;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.option-btn {
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 18px;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.option-btn:hover:not(.disabled) {
+  background: var(--bg-card-hover);
+  border-color: var(--primary);
+}
+
+.option-btn:active:not(.disabled) { transform: scale(0.98); }
+
+.option-btn .option-key {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(99,102,241,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary-light);
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+
+.option-btn .option-text { flex: 1; }
+
+.option-btn.disabled { cursor: default; pointer-events: none; }
+
+.option-btn.selected-correct {
+  border-color: var(--correct);
+  background: var(--correct-bg);
+  animation: correctPulse 0.4s ease;
+}
+
+.option-btn.selected-correct .option-key {
+  background: var(--correct);
+  color: #fff;
+}
+
+.option-btn.selected-wrong {
+  border-color: var(--wrong);
+  background: var(--wrong-bg);
+  animation: wrongShake 0.4s ease;
+}
+
+.option-btn.selected-wrong .option-key {
+  background: var(--wrong);
+  color: #fff;
+}
+
+.option-btn.reveal-correct {
+  border-color: var(--correct);
+  background: var(--correct-bg);
+}
+
+.option-btn.reveal-correct .option-key {
+  background: var(--correct);
+  color: #fff;
+}
+
+/* ====== EXPLANATION ====== */
+.explanation-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--amber);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  animation: slideUp 0.4s ease;
+  display: none;
+}
+
+.explanation-panel.visible { display: block; }
+
+.explanation-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--amber);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.explanation-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.study-suggestion {
+  background: var(--amber-bg);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-top: 12px;
+}
+
+.study-suggestion-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--amber);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.study-suggestion-text {
+  font-size: 13px;
+  color: #d4b896;
+  line-height: 1.5;
+}
+
+.btn-next {
+  margin-top: 8px;
+}
+
+/* ====== RESULTS ====== */
+.results-score {
+  text-align: center;
+  padding: 30px 0;
+}
+
+.results-circle {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 20px;
+  position: relative;
+}
+
+.results-circle svg { transform: rotate(-90deg); }
+
+.results-circle-bg {
+  fill: none;
+  stroke: rgba(99,102,241,0.15);
+  stroke-width: 8;
+}
+
+.results-circle-fill {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s ease;
+}
+
+.results-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 36px;
+  font-weight: 900;
+}
+
+.results-label {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.results-message {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+.results-list {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.result-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.result-icon.correct { background: var(--correct); color: #fff; }
+.result-icon.wrong { background: var(--wrong); color: #fff; }
+
+.result-topic {
+  font-size: 13px;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.weak-topics {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--amber);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin: 20px 0;
+}
+
+.weak-topics-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--amber);
+  margin-bottom: 12px;
+}
+
+.weak-topic-item {
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+.weak-topic-item:last-child { border-bottom: none; }
+
+/* ====== DASHBOARD ====== */
+.dashboard-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.dashboard-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.dash-block {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.dash-block-name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.dash-block-score {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ====== ANIMATIONS ====== */
+@keyframes correctPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.015); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(16px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in { animation: fadeIn 0.3s ease; }
+
+/* ====== RESPONSIVE ====== */
+@media (min-width: 481px) {
+  .container { padding: 24px; }
+  .landing-stats { gap: 16px; }
+}
+
+@media (max-width: 360px) {
+  .quiz-question { font-size: 15px; padding: 16px; }
+  .option-btn { min-height: 50px; padding: 12px 14px; font-size: 13px; }
+  .landing-greeting { font-size: 24px; }
 }
 </style>
 </head>
 <body>
 
-<div class="cover">
-  <div class="badge">Material de Revisão Intensiva</div>
-  <h1>Revisão Intensiva<br>ETEC 2026</h1>
-  <p class="subtitle">ETEC Rodrigues de Abreu — Centro Paula Souza<br>Professor de Ensino Médio e Técnico</p>
-  <div class="meta">
-    <div class="meta-item"><div class="label">Prova Objetiva</div><div class="value">25 questões · 4 alternativas</div></div>
-    <div class="meta-item"><div class="label">Componente</div><div class="value">5163 — Noções de Dir. Tributário</div></div>
-    <div class="meta-item"><div class="label">Edital</div><div class="value">nº 135/08/2026</div></div>
-  </div>
-  <div class="blocks">
-    <div class="block">📘 Bloco 1 — Direito Tributário</div>
-    <div class="block">📗 Bloco 2 — Legislação e Admin.</div>
-    <div class="block">📙 Bloco 3 — Legislação Educação</div>
-  </div>
-  <p style="margin-top:40px;color:#64748b;font-size:13px">7 Dias para Aprovação · Maio 2026 · Versão Corrigida e Completa</p>
-</div>
+<div class="container" id="app">
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <button class="nav-back" id="navBack" onclick="goBack()">&#8592; Voltar</button>
+    <span class="nav-title" id="navTitle">Quiz Escriturario</span>
+    <span class="nav-progress" id="navProgress"></span>
+  </nav>
 
-<div class="container">
-  <div id="content">Carregando...</div>
+  <!-- SCREEN: LANDING -->
+  <div class="screen active" id="screenLanding">
+    <div class="landing-hero">
+      <h1 class="landing-greeting">Ola, Dandara!</h1>
+      <p class="landing-subtitle">Concurso Escriturario — Piratininga-SP 2026</p>
+
+      <div class="progress-ring-container">
+        <svg class="progress-ring" width="160" height="160">
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#6366f1"/>
+              <stop offset="100%" stop-color="#8b5cf6"/>
+            </linearGradient>
+          </defs>
+          <circle class="progress-ring-bg" cx="80" cy="80" r="65"/>
+          <circle class="progress-ring-fill" id="progressRing" cx="80" cy="80" r="65"
+            stroke-dasharray="408.4" stroke-dashoffset="408.4"/>
+        </svg>
+        <div class="progress-ring-text">
+          <div class="progress-ring-pct" id="landingPct">0%</div>
+          <div class="progress-ring-label">Completo</div>
+        </div>
+      </div>
+
+      <div class="landing-stats">
+        <div class="stat-card">
+          <div class="stat-value" id="statAnswered">0</div>
+          <div class="stat-label">Respondidas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statCorrect">0</div>
+          <div class="stat-label">Acertos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statAccuracy">--</div>
+          <div class="stat-label">Precisao</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="navigate('#/blocks')">Escolher Bloco</button>
+    <button class="btn btn-secondary" onclick="navigate('#/dashboard')">Ver Dashboard</button>
+  </div>
+
+  <!-- SCREEN: BLOCKS -->
+  <div class="screen" id="screenBlocks">
+    <div class="blocks-grid" id="blocksGrid"></div>
+  </div>
+
+  <!-- SCREEN: QUIZ -->
+  <div class="screen" id="screenQuiz">
+    <div class="quiz-header">
+      <div class="quiz-dots" id="quizDots"></div>
+      <div class="quiz-counter" id="quizCounter"></div>
+      <div class="quiz-topic" id="quizTopic"></div>
+    </div>
+    <div class="quiz-question" id="quizQuestion"></div>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="explanation-panel" id="explanationPanel">
+      <div class="explanation-title">Explicacao</div>
+      <div class="explanation-text" id="explanationText"></div>
+      <div class="study-suggestion" id="studySuggestion">
+        <div class="study-suggestion-title">O que estudar</div>
+        <div class="study-suggestion-text" id="studySuggestionText"></div>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-next" id="btnNext" style="display:none" onclick="nextQuestion()">Proxima Questao</button>
+  </div>
+
+  <!-- SCREEN: RESULTS -->
+  <div class="screen" id="screenResults">
+    <div class="results-score">
+      <div class="results-circle">
+        <svg width="140" height="140">
+          <circle class="results-circle-bg" cx="70" cy="70" r="56"/>
+          <circle class="results-circle-fill" id="resultsCircle" cx="70" cy="70" r="56"
+            stroke-dasharray="351.9" stroke-dashoffset="351.9"/>
+        </svg>
+        <div class="results-number" id="resultsNumber">0/10</div>
+      </div>
+      <div class="results-label">Acertos neste bloco</div>
+      <div class="results-message" id="resultsMessage"></div>
+    </div>
+    <div class="results-list" id="resultsList"></div>
+    <div class="weak-topics" id="weakTopics" style="display:none">
+      <div class="weak-topics-title">Topicos para Revisar</div>
+      <div id="weakTopicsList"></div>
+    </div>
+    <button class="btn btn-primary" onclick="retryBlock()">Refazer Bloco</button>
+    <button class="btn btn-secondary" onclick="navigate('#/blocks')">Voltar aos Blocos</button>
+  </div>
+
+  <!-- SCREEN: DASHBOARD -->
+  <div class="screen" id="screenDashboard">
+    <h2 class="dashboard-title">Seu Progresso</h2>
+    <div class="dashboard-blocks" id="dashBlocks"></div>
+    <div class="weak-topics" id="dashWeakTopics" style="display:none">
+      <div class="weak-topics-title">Topicos para Revisar (Geral)</div>
+      <div id="dashWeakList"></div>
+    </div>
+    <button class="btn btn-secondary" onclick="navigate('#/')">Voltar ao Inicio</button>
+    <button class="btn btn-danger" onclick="confirmReset()">Resetar Progresso</button>
+  </div>
 </div>
 
 <script>
-const md = `# Revisão Intensiva ETEC 2026\n\n**ETEC | Centro Paula Souza**\nProfessor de Ensino Médio e Técnico\nProva Objetiva | 25 questões | 4 alternativas\nEdital nº 135/08/2026 — Componente 5163: Noções de Direito Tributário\n\n---\n\n## Cronograma de 7 Dias\n\n4 dias Direito Tributário (peso maior) + 1 dia Legislação + 1 dia Educação + 1 dia Revisão\n\n| Dia | Tema | Tempo |\n|-----|------|-------|\n| **Dia 1** | Tributário I: Fundamentos — Espécies de tributos, Incidência, Tarifas | 3-4h |\n| **Dia 2** | Tributário II: Normas e Princípios — Fontes, Vigência, Princípios, Regra-Matriz | 3-4h |\n| **Dia 3** | Tributário III: Crédito Tributário — Lançamento, Suspensão, Exclusão, Extinção, Benefícios | 3-4h |\n| **Dia 4** | Tributário IV: Administração + Revisão — Infrações, Fiscalização, Dívida Ativa, Certidões | 2-3h |\n| **Dia 5** | Legislação e Administração Pública — LAI, Processo Admin. SP, Deliberações Ceeteps, Informática | 3-4h |\n| **Dia 6** | Legislação sobre Educação — LDB (Cap. II inteiro), Lei 13.415, Resoluções CNE, Parecer 39, Decreto 5.154 | 3-4h |\n| **Dia 7** | Revisão Geral + Simulado — Tabelas, pegadinhas, mnemônicos, simulado sem consulta | 2-3h |\n\n---\n\n# BLOCO 1 — DIREITO TRIBUTÁRIO\n\nFoco principal da prova | Dias 1 a 4 do cronograma\n\n---\n\n## 1.1 Espécies de Tributos\n\n**DECORAR — CTN, art. 3º:**\n> "Tributo é toda prestação **PECUNIÁRIA COMPULSÓRIA**, em moeda ou cujo valor nela se possa exprimir, que **NÃO CONSTITUA SANÇÃO DE ATO ILÍCITO**, instituída em **LEI** e cobrada mediante **ATIVIDADE ADMINISTRATIVA PLENAMENTE VINCULADA**."\n\n### Teoria Pentapartite (STF): 5 espécies tributárias\n\n| Espécie | Fato Gerador | Competência | Vinculado? |\n|---------|-------------|-------------|------------|\n| Imposto | Situação independente de atividade estatal (art. 16 CTN) | U, E, DF, M | NÃO vinculado |\n| Taxa | Poder de polícia OU serviço público específico e divisível | U, E, DF, M | Vinculado |\n| Contrib. Melhoria | Obra pública que gera valorização imobiliária | U, E, DF, M | Vinculado |\n| Empr. Compulsório | Calamidade, guerra ou investimento urgente (art. 148 CF) | Só UNIÃO (LC) | Vinculado (restituível) |\n| Contrib. Sociais | Finalidade específica: seguridade, intervenção, categorias | Regra: UNIÃO | Vinculado à finalidade |\n\n### Impostos por Competência\n\n| União (Federal) | Estados/DF | Municípios/DF |\n|-----------------|-----------|---------------|\n| II, IE, IR, IPI, IOF, ITR, IGF | ICMS, IPVA, ITCMD | ISS, IPTU, ITBI |\n| 7 impostos + residual + extraordinário | 3 impostos | 3 impostos |\n\n> **PEGADINHA — Taxa vs Imposto**\n> Taxa NÃO pode ter base de cálculo própria de imposto (art. 145, §2º CF). Se a questão diz "é possível instituir taxa sobre o valor venal do imóvel" → **FALSO** (base de cálculo do IPTU).\n\n> **PEGADINHA — Empréstimo Compulsório**\n> Somente a UNIÃO pode instituir (art. 148 CF) e APENAS por Lei Complementar. Se disser "Estado pode instituir empréstimo compulsório" → **ERRADO**.\n\n> **PEGADINHA — Contribuição de Melhoria**\n> Limite individual: VALORIZAÇÃO do imóvel. Limite total: CUSTO da obra. A banca pode inverter esses limites.\n\n---\n\n## 1.2 Incidência Tributária\n\n### Fato Gerador\n- **Hipótese de incidência**: descrição abstrata na lei (previsão normativa)\n- **Fato gerador concreto**: quando a situação prevista ocorre no mundo real\n- Art. 114 CTN: situação definida em lei como necessária e suficiente para o nascimento da obrigação\n\n### Base de Cálculo\n- Grandeza econômica sobre a qual incide a alíquota\n- Deve guardar relação com o fato gerador\n- Ex: IR = rendimentos; IPTU = valor venal; ICMS = valor da operação\n\n### Tipos de Alíquota\n\n| Tipo | Definição | Exemplo |\n|------|----------|---------|\n| Fixa | Valor absoluto em reais, independe da base | ISS fixo para autônomos |\n| Proporcional | Percentual fixo sobre a base de cálculo | ICMS 18% |\n| Progressiva | Percentual aumenta conforme a base aumenta | IR (7,5% a 27,5%) |\n| Seletiva | Varia conforme essencialidade do produto | IPI (menor p/ alimentos básicos) |\n\n---\n\n## 1.3 Conceito de Tarifas\n\n**Tarifa (preço público) NÃO é tributo.** É contraprestação por serviço público FACULTATIVO, sob regime de DIREITO PRIVADO.\n\n| Característica | Taxa | Tarifa (Preço Público) |\n|----------------|------|----------------------|\n| Natureza | TRIBUTO | NÃO é tributo |\n| Regime | Direito Público | Direito Privado |\n| Compulsoriedade | Compulsória | Facultativa (usa se quiser) |\n| Instituição | Por lei | Por contrato/ato administrativo |\n| Serviço | Específico e divisível (compulsório) | Uso facultativo |\n| Exemplos | Taxa de coleta de lixo | Pedágio, tarifa de ônibus |\n\n> **PEGADINHA CLÁSSICA**\n> A banca pode colocar "tarifa" como espécie tributária. **TARIFA NÃO É TRIBUTO!** Se a questão perguntar "são espécies tributárias" e incluir "tarifa" → ERRADA.\n\n---\n\n## 1.4 Fontes do Direito Tributário\n\n### Fontes Formais Primárias\n- Constituição Federal\n- Emendas Constitucionais\n- Leis Complementares (reservadas: normas gerais, empréstimo compulsório, IGF)\n- Leis Ordinárias (regra geral para instituir tributos)\n- Medidas Provisórias (podem instituir tributos, exceto os reservados à LC)\n- Decretos Legislativos\n- Resoluções do Senado (alíquotas ICMS interestadual, ITCMD máximo)\n- Tratados e Convenções Internacionais (art. 98 CTN — revogam legislação interna)\n\n### Fontes Formais Secundárias (art. 100 CTN)\n- Atos normativos das autoridades administrativas (decretos, portarias, instruções)\n- Decisões com eficácia normativa\n- Práticas reiteradas das autoridades\n- Convênios celebrados entre U, E, DF, M\n\n> **PEGADINHA — Convênios CONFAZ**\n> Convênios CONFAZ = isenções/benefícios de ICMS (art. 155, §2º, XII, CF). NÃO confundir com tratados internacionais. Convênio CONFAZ não é lei — precisa de ratificação por decreto legislativo estadual.\n\n---\n\n## 1.5 Vigência e Aplicação das Normas Tributárias\n\n### Vigência (art. 101-104 CTN)\n- Regra geral: segue a LINDB (45 dias após publicação, se não houver data)\n- Normas complementares (art. 100): vigência na data da publicação\n- Atos do Executivo (II, IE, IOF, IPI): vigência imediata\n\n### Anterioridade (art. 150, III, CF)\n\n| Regra | O que é | Exceções |\n|-------|---------|----------|\n| Anual (b) | Só cobra no exercício financeiro seguinte | II, IE, IPI, IOF, Empr.Comp.(guerra), CIDE-comb, ICMS-comb, Contrib.Seguridade |\n| Noventena (c) | Mínimo 90 dias após publicação | II, IE, IOF, IR, Empr.Comp.(guerra), BC do IPVA e IPTU |\n\n**DICA PARA DECORAR:**\n- Não respeita NEM anual NEM noventena: **II, IE, IOF, Empr. Compulsório (guerra/calamidade)**\n- Só noventena (sem anual): **IPI, CIDE-comb, ICMS-comb, Contrib. Seguridade**\n- Só anual (sem noventena): **IR, BC do IPVA, BC do IPTU**\n\n### Interpretação (art. 111 CTN)\n\nInterpreta-se **LITERALMENTE** a legislação que disponha sobre:\n- Suspensão ou EXCLUSÃO do crédito tributário\n- Outorga de ISENÇÃO\n- Dispensa de obrigações acessórias\n\n### Integração (art. 108 CTN) — Ordem obrigatória\n\n1º Analogia → 2º Princípios gerais → 3º Princípios de dir. público → 4º Equidade\n\n> **PEGADINHA — Limites da Integração**\n> ANALOGIA NÃO pode criar tributo (art. 108, §1º). EQUIDADE NÃO pode dispensar pagamento de tributo devido (art. 108, §2º). Bancas adoram dizer que "analogia pode instituir nova hipótese de incidência" → **FALSO**.\n\n### Aplicação — Retroatividade (art. 106 CTN)\n- **Lei interpretativa**: aplica-se a fatos anteriores (sem aplicar penalidade)\n- **Lei mais benigna**: aplica-se a ato não definitivamente julgado, quando deixa de tratar como infração ou comina penalidade menos severa\n\n---\n\n## 1.6 Princípios Constitucionais Tributários\n\n| Princípio | Base Legal | Significado |\n|-----------|-----------|-------------|\n| Legalidade | Art. 150, I | Tributo só por LEI. Exceções: II, IE, IOF, IPI (alíquota por decreto) |\n| Anterioridade | Art. 150, III, b-c | Anual + 90 dias (ver tabela acima) |\n| Irretroatividade | Art. 150, III, a | Não cobra sobre fatos anteriores à vigência |\n| Isonomia | Art. 150, II | Tratamento igual entre contribuintes em situação equivalente |\n| Capacidade Contributiva | Art. 145, §1º | Impostos graduados conforme capacidade econômica |\n| Vedação de Confisco | Art. 150, IV | Tributo não pode ser excessivamente oneroso |\n| Liberdade de Tráfego | Art. 150, V | Vedado limitar trânsito por tributo interestadual |\n| Uniformidade Geogr. | Art. 151, I | União: tributo uniforme em todo território |\n\n### Imunidades Tributárias (art. 150, VI CF)\n- a) **Recíproca**: entre U, E, DF, M (extensiva a autarquias e fundações)\n- b) **Templos** de qualquer culto\n- c) **Partidos políticos**, sindicatos de trabalhadores, instituições educacionais/assistenciais sem fins lucrativos\n- d) **Livros**, jornais, periódicos e papel destinado à impressão\n\n### Bis in Idem vs Bitributação\n\n| Conceito | O que é | Constitucional? |\n|----------|---------|----------------|\n| Bis in idem | MESMO ENTE tributa o MESMO fato gerador com tributos diferentes | Pode ser (ex: IR + CSLL pela União) |\n| Bitributação | ENTES DIFERENTES tributam o MESMO fato gerador | Em regra INCONSTITUCIONAL |\n\n> **PEGADINHA — Bis in Idem vs Bitributação**\n> Bancas TROCAM os conceitos. Memorize: "Bis" = mesmo ente, 2x. "Bi" = 2 entes. Bis in idem pode ser constitucional. Bitributação em regra não.\n\n---\n\n## 1.7 Regra-Matriz de Incidência Tributária\n\nEstrutura lógica da norma tributária (Paulo de Barros Carvalho):\n\n| HIPÓTESE (Antecedente) — "Se..." | Descrição |\n|----------------------------------|-----------|\n| Critério Material | Verbo + complemento (ex: "auferir renda", "prestar serviço") |\n| Critério Espacial | Onde o fato ocorre (território, estabelecimento) |\n| Critério Temporal | Momento em que o fato se considera ocorrido |\n\n| CONSEQUENTE (Prescritivo) — "Então..." | Descrição |\n|----------------------------------------|-----------|\n| Critério Pessoal | Sujeito ativo (credor: ente) e Sujeito passivo (devedor: contribuinte/responsável) |\n| Critério Quantitativo | Base de cálculo × Alíquota = valor do tributo |\n\n**RESUMO RÁPIDO:** Hipótese = 3 critérios | Consequente = 2 critérios | Total = 5 critérios da RMIT\n\n---\n\n## 1.8 Benefícios Fiscais e Institutos Correlatos\n\n| Instituto | Natureza | Quem concede | Revogável? |\n|-----------|---------|--------------|------------|\n| Imunidade | Limitação constitucional ao poder de tributar | Constituição Federal | Só por EC |\n| Isenção | Exclusão do crédito tributário | Lei infraconstitucional | Sim (regra geral) |\n| Alíquota Zero | Incide mas valor = zero | Lei ou decreto | Sim |\n| Não-incidência | Fato não previsto na hipótese legal | N/A (ausência de norma) | N/A |\n\n> **PEGADINHA — Imunidade vs Isenção**\n> IMUNIDADE = Constituição (limitação ao poder de tributar). ISENÇÃO = lei infraconstitucional (exclusão do crédito tributário). Se a questão disser "isenção prevista na Constituição" → **ERRADO**, isso é imunidade.\n\n---\n\n## 1.9 Crédito Tributário\n\n### Lançamento (art. 142 CTN)\n\nAto administrativo vinculado que constitui o crédito tributário.\n\n| Modalidade | Quem faz | Exemplos |\n|-----------|---------|----------|\n| De ofício (art. 149) | Autoridade administrativa sozinha | IPTU, IPVA |\n| Por declaração (art. 147) | Contribuinte declara, Fisco lança | ITBI (em alguns municípios) |\n| Por homologação (art. 150) | Contribuinte calcula e paga, Fisco homologa | IR, ICMS, IPI, ISS |\n\n### SUSPENSÃO da Exigibilidade (art. 151 CTN)\n\n**MNEMÔNICO: DEMORE LIMPA**\n- **DE**pósito do montante integral\n- **MO**ratória\n- **RE**clamações e recursos administrativos\n- **LIM**inar em mandado de segurança\n- **P**arcelamento\n- **A**ntecipação de tutela (liminar/tutela antecipada)\n\n### EXCLUSÃO do Crédito (art. 175 CTN)\n\n**MNEMÔNICO: IA** (só 2!)\n- **I**senção\n- **A**nistia\n\n### EXTINÇÃO do Crédito (art. 156 CTN)\n\n| # | Hipótese de Extinção |\n|---|---------------------|\n| 1 | Pagamento |\n| 2 | Compensação |\n| 3 | Transação |\n| 4 | Remissão (perdão do crédito) |\n| 5 | Prescrição (5 anos — perda do direito de COBRAR) |\n| 6 | Decadência (5 anos — perda do direito de LANÇAR) |\n| 7 | Conversão do depósito em renda |\n| 8 | Pagamento antecipado + homologação |\n| 9 | Consignação em pagamento julgada procedente |\n| 10 | Decisão administrativa irreformável |\n| 11 | Decisão judicial transitada em julgado |\n| 12 | Dação em pagamento de BENS IMÓVEIS |\n\n### Quadro Comparativo: Suspensão × Exclusão × Extinção\n\n| Aspecto | Suspensão | Exclusão | Extinção |\n|---------|----------|---------|----------|\n| Efeito | Paralisa temporariamente a cobrança | Impede constituição do crédito | Encerra definitivamente |\n| Crédito existe? | Sim, mas suspenso | Não chega a ser constituído | Existia e foi extinto |\n| Quantas hipóteses | 6 (DEMORE LIMPA) | 2 (Isenção e Anistia) | 12 hipóteses |\n\n> **PEGADINHA MAIS CLÁSSICA DE TRIBUTÁRIO**\n> Bancas MISTURAM as listas! Ex: "Parcelamento é causa de EXTINÇÃO" → ERRADO (é SUSPENSÃO). Ex: "Anistia é causa de SUSPENSÃO" → ERRADO (é EXCLUSÃO). DECORE: DEMORE LIMPA (suspensão) e IA (exclusão).\n\n> **PEGADINHA — Anistia vs Isenção**\n> ANISTIA = perdão de INFRAÇÕES/PENALIDADES (passadas). ISENÇÃO = dispensa do pagamento de TRIBUTO (fatos futuros/presentes). Bancas trocam os conceitos.\n\n> **PEGADINHA — Remissão vs Remição**\n> REMISSÃO (com SS) = perdão do CRÉDITO tributário (extinção). REMIÇÃO (com Ç) = resgate de bem penhorado (processo civil). Uma letra muda tudo.\n\n### Garantias do Crédito (art. 183-193 CTN)\n- Totalidade dos bens do sujeito passivo responde pelo crédito (art. 184)\n- Presunção de fraude: alienação após inscrição em dívida ativa (art. 185)\n- Crédito tributário tem PREFERÊNCIA sobre outros, exceto trabalhista e acidente de trabalho (art. 186)\n- Na falência: crédito tributário fica atrás dos trabalhistas e créditos com garantia real até o limite do bem\n\n---\n\n## 1.10 Infrações e Sanções Tributárias\n\n- Responsabilidade **OBJETIVA** (art. 136 CTN): não depende de intenção do agente (dolo/culpa irrelevantes)\n- Exceção: crimes tributários exigem dolo (Lei 8.137/90)\n- Penalidades: multa (principal sanção), juros moratórios, apreensão de mercadorias\n\n### Denúncia Espontânea (art. 138 CTN)\n- Contribuinte confessa a infração ANTES de qualquer procedimento fiscal\n- Efeito: **EXCLUI A MULTA**\n- Deve pagar o tributo + juros (juros NÃO são excluídos)\n\n> **PEGADINHA — Denúncia Espontânea**\n> "A denúncia espontânea exclui multa E juros" → **ERRADO!** Exclui só a multa. Juros de mora continuam devidos.\n\n---\n\n## 1.11 Administração Tributária\n\n### Fiscalização (art. 194-200 CTN)\n- Aplica-se a TODAS as pessoas, inclusive imunes e isentas (art. 194)\n- Sigilo fiscal: informações do contribuinte são protegidas\n- Troca de informações entre Fiscos: permitida (art. 199)\n- Fiscalização de livros comerciais: limitada a pontos de interesse tributário (art. 195)\n\n### Dívida Ativa (art. 201-204 CTN)\n- Crédito tributário inscrito em dívida ativa = título executivo extrajudicial\n- CDA (Certidão de Dívida Ativa): presunção **RELATIVA** de liquidez e certeza (juris tantum)\n- Pode ser ilidida (derrubada) por prova inequívoca do sujeito passivo\n\n### Certidões Negativas (art. 205-208 CTN)\n\n| Tipo | Significado |\n|------|-----------|\n| Certidão Negativa | Não há débitos tributários |\n| Certidão Positiva com Efeito de Negativa | Há débitos, mas com exigibilidade SUSPENSA ou garantidos por penhora (art. 206) |\n\n> **PONTO IMPORTANTE**\n> A CDA tem presunção RELATIVA (não absoluta). A banca pode dizer "presunção absoluta" → **ERRADO**.\n\n---\n\n## 1.12 Extinção das Obrigações Tributárias\n\n### Prescrição vs Decadência\n\n| Aspecto | Prescrição | Decadência |\n|---------|-----------|------------|\n| Prazo | 5 anos | 5 anos |\n| Conta a partir de | Constituição definitiva do crédito | 1º dia do exercício seguinte (art. 173, I) |\n| Perda do direito de | COBRAR (ação judicial) | LANÇAR (constituir o crédito) |\n| Fase | Após o lançamento | Antes do lançamento |\n\n> **PEGADINHA CLÁSSICA**\n> PRESCRIÇÃO = direito de COBRAR (após lançar). DECADÊNCIA = direito de LANÇAR (antes de lançar). A banca INVERTE os conceitos. Decore: "Primeiro deCade (lançar), depois presCrEve (cobrar)".\n\n---\n\n# BLOCO 2 — LEGISLAÇÃO E ADMINISTRAÇÃO PÚBLICA\n\nDia 5 do cronograma | LAI, Processo Administrativo, Deliberações Ceeteps, Informática\n\n---\n\n## 2.1 Lei de Acesso à Informação (Lei 12.527/2011)\n\n**Princípio Central:** Publicidade é a REGRA, sigilo é a EXCEÇÃO.\n\n**Abrangência:** Todos os órgãos públicos da administração direta e indireta de TODOS os Poderes e entes. Entidades privadas sem fins lucrativos que recebam recursos públicos (parcialmente).\n\n### Prazos para Resposta\n\n| Situação | Prazo |\n|----------|-------|\n| Resposta ao pedido de informação | 20 dias (corridos) |\n| Prorrogação | +10 dias (mediante justificativa expressa) |\n| Recurso contra negativa | 10 dias a partir da ciência |\n| Autoridade superior decide recurso | 5 dias |\n\n### Classificação de Sigilo (art. 23-24)\n\n| Grau | Prazo Máximo | Quem classifica |\n|------|-------------|----------------|\n| Ultrassecreto | **25** anos | Presidente, Vice, Ministros, Comandantes FA |\n| Secreto | **15** anos | Os acima + titulares de autarquias, fundações, EP, SEM |\n| Reservado | **5** anos | Os acima + função de direção/comando/chefia (DAS 101.5+) |\n\n**DECORAR: 25-15-5** (de cima pra baixo, subtrai 10)\n\n> **PEGADINHA — Informação Pessoal**\n> Informação pessoal (vida privada, honra, imagem) tem restrição de acesso de **100 ANOS** (art. 31), independente de classificação de sigilo. NÃO confundir com 25/15/5.\n\n> **PEGADINHA — Pedido não precisa ser motivado**\n> O pedido de acesso à informação NÃO precisa ser motivado (art. 10, §3º). Só identidade e especificação da informação.\n\n---\n\n## 2.2 Decreto 68.155/2023 (SP) — Regulamentação Estadual da LAI\n\n- Regulamenta a LAI no âmbito da administração pública estadual paulista\n- Cria o SIC (Serviço de Informações ao Cidadão) em cada órgão\n- Estabelece o Portal de Transparência do Estado como canal principal\n- Regulamenta transparência ativa: informações publicadas independente de solicitação\n- Reforça os prazos da LAI federal (20 + 10 dias)\n\n> **PONTO-CHAVE:** O decreto estadual NÃO cria novos prazos nem novas classificações — apenas regulamenta os procedimentos da LAI federal no âmbito paulista.\n\n---\n\n## 2.3 Processo Administrativo SP (Lei 10.177/1998)\n\n### Princípios\nLegalidade, Finalidade, Razoabilidade, Motivação, Interesse Público\n\n### Prazos Processuais\n\n| Ato | Prazo |\n|-----|-------|\n| Manifestação/contestação do interessado | 15 dias |\n| Prática de atos pelo órgão (quando não fixado em lei) | 15 dias (pode estender por igual período) |\n| Recurso administrativo | 15 dias da ciência da decisão |\n| Decisão sobre recurso | 30 dias |\n\n### Invalidação de Atos\n\n| Tipo | Motivo | Efeitos | Prazo |\n|------|--------|---------|-------|\n| Anulação | Ato ILEGAL | Ex tunc (retroativos) | 10 anos |\n| Revogação | Ato legal mas inconveniente | Ex nunc (prospectivos) | Sem prazo fixo |\n\n> **PEGADINHA — Anulação vs Revogação**\n> ANULAÇÃO = ilegalidade, ex tunc (volta tudo). REVOGAÇÃO = mérito (conveniência), ex nunc (só dali em diante).\n\n---\n\n## 2.4 Deliberação Ceeteps 11/2015 — Regulamento Disciplinar\n\n### Penalidades Disciplinares (ordem crescente de gravidade)\n\n| # | Penalidade | Aplicação |\n|---|-----------|-----------|\n| 1 | Advertência | Faltas leves (descumprimento de dever, negligência leve) |\n| 2 | Repreensão | Reincidência em falta leve ou infrações medianas |\n| 3 | Suspensão | Até 90 dias. Faltas graves ou reincidência em repreensão |\n| 4 | Demissão | Faltas gravíssimas (improbidade, abandono, insubordinação grave) |\n| 5 | Demissão a bem do serviço público | Caso extremo: conduta incompatível com o cargo |\n\n### Procedimento Disciplinar\n- **Sindicância**: procedimento prévio e investigatório (pode resultar em arquivamento ou abertura de PAD)\n- **PAD**: processo formal com contraditório e ampla defesa\n- Comissão processante: no mínimo 3 membros\n\n### Direitos do Servidor no Processo\n- Ciência dos fatos imputados\n- Prazo para defesa: 10 dias (contados da citação)\n- Produção de provas e arrolamento de testemunhas\n- Vista dos autos e obtenção de cópias\n- Acompanhamento por advogado (facultativo)\n\n> **PEGADINHA — Sindicância vs PAD**\n> SINDICÂNCIA = investigação preliminar (NÃO é punitiva por si só). PAD = processo punitivo formal.\n\n---\n\n## 2.5 Deliberação Ceeteps 85/2022 — Regimento Comum das ETECs\n\n### Estrutura Organizacional\n- **Direção**: Diretor da Unidade (gestor máximo)\n- **Coordenação Pedagógica**: Coordenadores de Curso\n- **Secretaria Acadêmica**: controle de documentação e registros\n- **Corpo Docente**: professores das áreas técnicas e base nacional comum\n\n### Órgãos Colegiados\n\n| Órgão | Composição | Função |\n|-------|-----------|--------|\n| Conselho de Escola | Diretor, docentes, funcionários, alunos, pais, comunidade | Órgão máximo: delibera sobre política educacional, aprova plano escolar |\n| Conselho de Classe | Professores da classe, coordenador, direção | Avaliação do desempenho dos alunos, estratégias pedagógicas |\n\n### Regime Escolar\n- Frequência mínima: **75%** da carga horária total\n- Avaliação: contínua, cumulativa e processual\n- Recuperação: contínua e paralela ao longo do período letivo\n\n### Atribuições do Professor — Art. 104 (ANEXO II do edital)\n\nAs 17 atribuições mais cobráveis:\n\n| # | Atribuição | Palavra-chave |\n|---|-----------|---------------|\n| 1 | Responder pela **aprendizagem** dos alunos | Aprendizagem |\n| 2 | Responder pelos assuntos referentes ao **aproveitamento** dos alunos | Aproveitamento |\n| 4 | Estabelecer estratégias de **recuperação contínua** para alunos de menor rendimento | Recuperação |\n| 5 | Cumprir integralmente os **dias letivos** e **horas-aula** | Dias letivos |\n| 6 | Participar do **planejamento**, **avaliação** e **desenvolvimento profissional** | Planejamento |\n| 7 | Elaborar e cumprir o **Plano de Trabalho Docente** conforme o **PPP** e **PPC** | PTD / PPP |\n| 8 | Informar alunos sobre o PTD no **início do período letivo** | Transparência |\n| 11 | Manter em dia os **registros escolares** e cumprir prazos | Registros |\n| 13 | Comparecer a **solenidades** e **reuniões** pedagógicas ou administrativas | Presença |\n| 15 | **Zelar** pelos materiais, instalações e equipamentos | Conservação |\n\n> **PEGADINHA — Plano de Trabalho Docente**\n> O professor elabora o PTD em consonância com o PPP da ETEC e o PPC. Se disser "elabora de forma autônoma e independente" → **ERRADO**.\n\n> **PEGADINHA — Conselho de Escola**\n> O CONSELHO DE ESCOLA é o órgão máximo (não o Diretor sozinho). Se disser "o Diretor decide sozinho sobre o plano escolar" → **ERRADO**.\n\n> **PEGADINHA — Frequência**\n> Frequência mínima = **75%** (não 80%, não 70%).\n\n---\n\n## 2.6 Noções Básicas de Informática\n\n### Atalhos Essenciais — Windows\n\n| Atalho | Função |\n|--------|--------|\n| Ctrl + C / V / X | Copiar / Colar / Recortar |\n| Ctrl + Z / Y | Desfazer / Refazer |\n| Ctrl + A | Selecionar tudo |\n| Ctrl + S | Salvar |\n| Ctrl + P | Imprimir |\n| Ctrl + F | Localizar |\n| Alt + Tab | Alternar janelas |\n| Alt + F4 | Fechar programa |\n| Win + E | Abrir Explorador de Arquivos |\n| Win + L | Bloquear tela |\n| Print Screen | Captura de tela |\n\n### Word — Pontos-chave\n- Formatação: Ctrl+B (negrito), Ctrl+I (itálico), Ctrl+U (sublinhado)\n- Estilos: padronizam formatação (Título 1, Título 2, Normal)\n- Quebra de página: Ctrl+Enter\n- Sumário automático: baseado nos Estilos de título\n\n### Excel — Fórmulas Essenciais\n\n| Fórmula | Função | Exemplo |\n|---------|--------|---------|\n| =SOMA(A1:A10) | Soma valores | Total de vendas |\n| =MÉDIA(A1:A10) | Média aritmética | Média de notas |\n| =SE(A1>7;"Aprov.";"Reprov.") | Condicional | Aprovação de alunos |\n| =PROCV(val;tab;col;0) | Busca vertical | Localizar aluno por RA |\n| =CONT.SE(A:A;"SP") | Conta células com critério | Quantos de SP |\n| =MÁXIMO / =MÍNIMO | Maior / Menor valor | Nota mais alta/baixa |\n\n**Dicas:** Referência absoluta usa \$ (\$A\$1). Formatação condicional destaca células por regras. Filtros: Dados > Filtro.\n\n### PowerPoint\n- Slide Mestre: define layout padrão para todos os slides\n- F5: iniciar apresentação do início; Shift+F5: do slide atual\n- Modo Apresentador: mostra notas + próximo slide\n\n### Internet e Segurança\n- HTTPS: conexão segura (cadeado) — usa certificado SSL/TLS\n- Phishing: tentativa de enganar usuário para roubar dados\n- Malware: vírus, trojan, ransomware, spyware\n- Firewall: barreira que filtra tráfego de rede\n- E-mail: CC (cópia), CCO/BCC (cópia oculta)\n\n> **PEGADINHA — Excel**\n> =SE() usa PONTO-E-VÍRGULA no Excel PT-BR (;) e não vírgula (,).\n\n---\n\n# BLOCO 3 — LEGISLAÇÃO SOBRE EDUCAÇÃO\n\nDia 6 do cronograma | LDB, Resoluções CNE, Parecer 39/2004, Decreto 5.154/2004\n\n---\n\n## 3.0 LDB 9.394/96 — Cap. II, Seção I: Disposições Gerais (arts. 22-28)\n\n> **⚠️ CONTEÚDO NOVO** — O edital cobra "Capítulo II – Da Educação Básica" INTEIRO. Esta seção faltava no material original.\n\n### Art. 22 — Finalidade da Educação Básica\n- Desenvolver o educando\n- Assegurar **formação comum** para exercício da **cidadania**\n- Fornecer meios para **progredir no trabalho** e em **estudos posteriores**\n\n### Art. 23 — Organização Escolar\nA educação básica pode ser organizada em: séries anuais, períodos semestrais, ciclos, alternância regular de períodos de estudos, grupos não-seriados, ou outra forma **sempre que o interesse do processo de aprendizagem assim o recomendar**.\n\n> **PEGADINHA:** A organização em séries NÃO é obrigatória. Se disser "deve ser obrigatoriamente em séries anuais" → **ERRADO**.\n\n### Art. 24 — Regras da Educação Básica (MUITO COBRADO!)\n\n| Regra | Conteúdo |\n|-------|----------|\n| Carga horária mínima anual | **800 horas** em **200 dias letivos** (mínimo) |\n| Frequência mínima | **75%** do total de horas letivas |\n| Avaliação | Contínua e cumulativa; **qualitativos prevalecem sobre quantitativos** |\n| Recuperação | Obrigatória; de preferência **paralela** ao período letivo |\n| Classificação | Por promoção, transferência ou avaliação feita pela escola |\n| Reclassificação | A escola pode reclassificar alunos, inclusive vindos do exterior |\n\n**DECORAR: 800 horas | 200 dias | 75% frequência**\n\n> **PEGADINHA — 800h vs 200 dias:** "mínimo de 180 dias" ou "mínimo de 1.000 horas" → **ERRADO**.\n\n> **PEGADINHA — Qualitativo > Quantitativo:** Se inverter (quantitativo sobre qualitativo) → **ERRADO**.\n\n> **PEGADINHA — Frequência 75%:** É sobre o total de horas letivas, NÃO por disciplina.\n\n### Art. 26 — Currículo\n- **Base nacional comum** (BNCC) + **parte diversificada** (características regionais/locais)\n- Componentes obrigatórios: Língua Portuguesa, Matemática, Ciências, Arte, Ed. Física\n- **Língua inglesa** obrigatória a partir do 6º ano do fundamental\n\n### Art. 27 — Diretrizes dos Conteúdos Curriculares\n- Valores fundamentais ao interesse social, direitos e deveres\n- Orientação para o trabalho\n- Promoção do desporto educacional\n\n### Art. 28 — Educação no Campo\n- Conteúdos e metodologias adequadas à zona rural\n- Calendário escolar conforme ciclos agrícolas e clima\n\n---\n\n## 3.1 LDB 9.394/96 — Ensino Médio (Seção IV, art. 35-36)\n\n### Finalidades do Ensino Médio (art. 35)\n- I — Consolidação e aprofundamento dos conhecimentos do fundamental\n- II — Preparação básica para o TRABALHO E CIDADANIA\n- III — Aprimoramento como pessoa humana (ética, autonomia, pensamento crítico)\n- IV — Compreensão dos fundamentos científico-tecnológicos\n\n### Currículo do Ensino Médio (art. 35-A, 36)\n- BNCC: máximo de **1.800 horas** do total\n- Carga horária total mínima: **3.000 horas** (progressivamente)\n- Disciplinas obrigatórias nos 3 anos: **PORTUGUÊS e MATEMÁTICA**\n\n### Itinerários Formativos (Lei 13.415/2017)\n\n| # | Área do Itinerário |\n|---|-------------------|\n| I | Linguagens e suas Tecnologias |\n| II | Matemática e suas Tecnologias |\n| III | Ciências da Natureza e suas Tecnologias |\n| IV | Ciências Humanas e Sociais Aplicadas |\n| V | **FORMAÇÃO TÉCNICA E PROFISSIONAL** |\n\n**O itinerário V é exatamente o que as ETECs oferecem** (MTEC/Novotec Integrado).\n\n### Principais Mudanças da Lei 13.415/2017\n- Criou os 5 itinerários formativos\n- Ampliou carga horária de 2.400h para **3.000h**\n- Incluiu Formação Técnica e Profissional como itinerário\n- Criou possibilidade de profissionais com **NOTÓRIO SABER** ministrarem aulas na Ed. Profissional\n- Flexibilizou: parte comum (BNCC) + parte diversificada (itinerários)\n\n> **PEGADINHA — Carga Horária:** Mínima = 3.000h (não 2.400h). Dessas, no máximo 1.800h são da BNCC.\n\n> **PEGADINHA — Obrigatoriedade:** Só Português e Matemática são obrigatórios nos 3 ANOS.\n\n---\n\n## 3.2 LDB — Ed. Profissional Técnica de Nível Médio (Seção IV-A, art. 36-A a 36-D)\n\n### Formas de Articulação com o Ensino Médio\n\n| Forma | Definição | Exemplo |\n|-------|----------|---------|\n| **Integrada** | Matrícula única, mesma instituição. Currículo unificado com único diploma | ETEC: ETIM |\n| **Concomitante** | Duas matrículas simultâneas, pode ser na MESMA OU em OUTRA instituição | EM numa escola + técnico na ETEC |\n| **Subsequente** | Para quem JÁ CONCLUIU o Ensino Médio | Adulto fazendo curso técnico |\n\n**MNEMÔNICO:** Integrada = Inteira (tudo junto) | Concomitante = Complementar (ao mesmo tempo) | Subsequente = Só depois\n\n### Art. 36-C — Concomitância\n- Na mesma instituição (interna)\n- Em instituições diferentes (externa)\n- Em instituições diferentes, com convênio de intercomplementaridade\n\n> **PEGADINHA — Concomitante:** "Só funciona na mesma instituição" → **ERRADO**. Pode ser na mesma OU em outra (art. 36-C).\n\n> **PEGADINHA — Subsequente:** Exige CONCLUSÃO do EM. Aluno cursando EM fazendo subsequente → **ERRADO**.\n\n---\n\n## 3.3 Resolução CNE/CP 1/2021 — Diretrizes para Ed. Profissional e Tecnológica\n\n### Princípios Norteadores\n- Articulação entre EDUCAÇÃO E TRABALHO\n- Organização curricular por **COMPETÊNCIAS PROFISSIONAIS**\n- Flexibilidade, interdisciplinaridade e contextualização\n- Atualização permanente conforme demandas do mundo do trabalho\n- Identidade dos perfis profissionais de conclusão\n\n### Organização Curricular\n- Currículo baseado em **competências profissionais** (não só conteúdos)\n- **Perfil profissional de conclusão**: define o que o egresso deve ser capaz de fazer\n- **Catálogo Nacional de Cursos Técnicos (CNCT)** como referência\n- Possibilidade de organização modular (certificações intermediárias)\n- Prática profissional: componente obrigatório\n\n### Níveis da EPT\n\n| Nível | Formação |\n|-------|---------|\n| Formação Inicial e Continuada (FIC) | Qualificação profissional (cursos curtos, mín. 160h) |\n| Ed. Profissional Técnica de Nível Médio | Habilitação técnica (**ETECs**) |\n| Ed. Profissional Tecnológica (Graduação) | Cursos superiores de tecnologia (**Fatecs**) |\n\n---\n\n## 3.4 Resolução CNE/CEB 3/2018 — Diretrizes Curriculares do Ensino Médio\n\n### Pontos Centrais\n- Currículo: BNCC (formação geral básica) + itinerários formativos\n- Formação geral básica: no máximo **1.800 horas**\n- **PROJETO DE VIDA** como eixo central da formação do estudante\n- Protagonismo juvenil e aprendizagem ativa\n\n### Arranjos Curriculares\n- Organizados por: módulos, créditos, disciplinas, projetos, núcleos temáticos\n- EAD permitido: até 20% para EM, até 30% para Ed. Profissional\n\n> **PEGADINHA — Projeto de Vida:** NÃO é uma disciplina — é um eixo transversal que perpassa todo o currículo.\n\n---\n\n## 3.5 Parecer CNE/CEB 39/2004 — Articulação EM e Ed. Profissional\n\n### Contexto Histórico\n- Decreto **2.208/97** havia SEPARADO obrigatoriamente o EM da Ed. Profissional\n- Decreto **5.154/2004** REVOGOU o anterior e permitiu novamente a integração\n- O Parecer 39/2004 orienta como implementar as 3 formas de articulação\n\n### Pontos Centrais do Parecer\n- Formação geral e técnica devem ser articuladas (não compartimentalizadas)\n- Na forma integrada: projeto pedagógico deve ser **ÚNICO E ORGÂNICO** (não é "somar disciplinas")\n- Aproveitamento de estudos e competências: reconhecimento de saberes anteriores\n- A escola define a oferta conforme seu PPP e capacidade\n\n> **PEGADINHA — Integrada ≠ somar disciplinas:** O Parecer enfatiza que a forma integrada NÃO é a simples soma de disciplinas do EM + Técnico. É currículo ORGÂNICO E UNIFICADO.\n\n> **PEGADINHA — Decreto revogado:** Decreto 2.208/97 foi REVOGADO pelo 5.154/2004. Se disser "ainda vigente" → **ERRADO**.\n\n---\n\n## 3.6 Decreto 5.154/2004 — Regulamentação da Ed. Profissional\n\n> **⚠️ CONTEÚDO NOVO** — O edital cobra diretamente. Faltava detalhamento no material original.\n\n### Contexto\n- **Revogou** o Decreto 2.208/97 (que obrigava separação EM / Ed. Profissional)\n- **Permitiu novamente** a forma INTEGRADA\n\n### Artigos Principais\n\n| Artigo | Conteúdo |\n|--------|----------|\n| Art. 1º | Ed. Profissional desenvolvida por: I – formação inicial e continuada; II – EPT de nível médio; III – Ed. Prof. tecnológica (graduação e pós) |\n| Art. 4º | **Formas de articulação**: I – Integrada; II – Concomitante; III – Subsequente |\n| Art. 4º, §1º | Integrada: mesma instituição, matrícula única, projeto pedagógico ÚNICO |\n| Art. 4º, §2º | Concomitante: na mesma ou em outra instituição, com ou sem convênio |\n| Art. 5º | Cursos organizados por **áreas profissionais**, conforme Catálogo Nacional |\n\n> **DICA DE PROVA:** "Qual decreto permitiu a reintegração do ensino técnico ao EM?" → **Decreto 5.154/2004**.\n\n---\n\n### Quadro-Resumo: Legislação Educacional\n\n| Norma | Tema Central | Palavra-chave |\n|-------|-------------|---------------|\n| LDB 9.394/96 (Cap. II, Seção I) | Ed. Básica: organização, carga horária, avaliação | 800h, 200 dias, 75% |\n| LDB (Seção IV) | Ensino Médio: finalidades, currículo | 3.000h, BNCC + itinerários |\n| Lei 13.415/2017 | Reforma do EM: itinerários, flexibilização | 5 itinerários, notório saber |\n| LDB (Seção IV-A) | Ed. Prof. Técnica: formas de articulação | Integrada, concomitante, subsequente |\n| Decreto 5.154/2004 | Revogou separação obrigatória EM/EPT | Reintegração, 3 formas |\n| Res. CNE/CP 1/2021 | Diretrizes gerais EPT: competências, perfil | Competências profissionais, CNCT |\n| Res. CNE/CEB 3/2018 | Diretrizes Curriculares EM pós-reforma | Projeto de vida, protagonismo |\n| Parecer CNE/CEB 39/2004 | Articulação EM + Ed. Profissional | Dec. 5.154/2004, integração orgânica |\n\n---\n\n# MINI-SIMULADO — 5 Questões\n\nFormato real da prova: 4 alternativas (A a D) | Use no Dia 7 (revisão)\nTempo sugerido: 25 minutos (5 min por questão)\n\n---\n\n**Questão 1 | Direito Tributário (Crédito Tributário)**\n\nSegundo o CTN, são causas de SUSPENSÃO da exigibilidade do crédito tributário:\n\nA) Isenção, anistia e moratória.\nB) Pagamento, compensação e transação.\nC) Moratória, depósito do montante integral e parcelamento.\nD) Remissão, prescrição e decadência.\n\n---\n\n**Questão 2 | Direito Tributário (Princípios)**\n\nSobre os princípios constitucionais tributários, assinale a CORRETA:\n\nA) O princípio da anterioridade anual se aplica a todos os tributos, sem exceção.\nB) A analogia pode ser utilizada para criar novos tributos não previstos em lei.\nC) O bis in idem ocorre quando dois entes federativos distintos tributam o mesmo fato gerador.\nD) O IR é exceção à anterioridade nonagesimal (noventena), mas deve obedecer à anterioridade anual.\n\n---\n\n**Questão 3 | Direito Tributário (Espécies e Tarifas)**\n\nAnalise as afirmativas e assinale a INCORRETA:\n\nA) A taxa é tributo vinculado ao poder de polícia ou serviço público específico e divisível.\nB) O empréstimo compulsório pode ser instituído por qualquer ente federativo, desde que por lei complementar.\nC) A tarifa (preço público) não possui natureza tributária e é cobrada pela utilização facultativa de serviço público.\nD) A contribuição de melhoria tem como limite individual a valorização do imóvel e como limite total o custo da obra.\n\n---\n\n**Questão 4 | Deliberação Ceeteps** *(CORRIGIDA)*\n\nDe acordo com a Deliberação Ceeteps nº 85/2022 e nº 11/2015, assinale a CORRETA:\n\nA) O Diretor da ETEC é a autoridade máxima da unidade e decide sozinho sobre a aprovação do Plano Escolar.\nB) A frequência mínima exigida dos alunos é de 80% da carga horária total do período letivo.\nC) As penalidades disciplinares, em ordem crescente de gravidade, são: advertência, repreensão, suspensão, demissão e demissão a bem do serviço público.\nD) A sindicância é o processo formal de aplicação de penalidades aos servidores, substituindo o PAD.\n\n---\n\n**Questão 5 | Legislação Educacional**\n\nSobre as formas de articulação entre o EM e a Ed. Profissional Técnica, conforme a LDB e o Parecer CNE/CEB 39/2004, assinale a CORRETA:\n\nA) Na forma integrada, o currículo é a simples soma das disciplinas do EM com as do curso técnico.\nB) A forma subsequente destina-se a alunos que estejam cursando simultaneamente o EM em outra instituição.\nC) A forma concomitante pode ocorrer na mesma instituição ou em instituições distintas, inclusive mediante convênio.\nD) O Decreto 2.208/97, ainda vigente, determina que o EM e a educação profissional devem ser obrigatoriamente separados.\n\n---\n\n# GABARITO COMENTADO\n\n### Questão 1 | Resposta: **C**\n- A) ERRADA — Isenção e anistia são EXCLUSÃO (art. 175 CTN).\n- B) ERRADA — Pagamento, compensação e transação são EXTINÇÃO (art. 156 CTN).\n- **C) CORRETA** — Todas são hipóteses de suspensão do art. 151 CTN (DEMORE LIMPA).\n- D) ERRADA — Remissão, prescrição e decadência são EXTINÇÃO.\n\n### Questão 2 | Resposta: **D**\n- A) ERRADA — Há exceções: II, IE, IPI, IOF, CIDE-comb, ICMS-comb, etc.\n- B) ERRADA — Analogia NÃO pode criar tributo (art. 108, §1º CTN).\n- C) ERRADA — Isso é BITRIBUTAÇÃO, não bis in idem.\n- **D) CORRETA** — IR respeita anterioridade anual mas é exceção à noventena.\n\n### Questão 3 | Resposta: **B**\n- A) CORRETA — Definição precisa de taxa.\n- **B) INCORRETA (gabarito)** — Empréstimo compulsório só pode ser instituído pela UNIÃO (art. 148 CF).\n- C) CORRETA — Tarifa é preço público, sem natureza tributária.\n- D) CORRETA — Limites da contribuição de melhoria.\n\n### Questão 4 | Resposta: **C**\n- A) ERRADA — O Conselho de Escola é o órgão máximo; Plano Escolar é aprovado pelo Conselho.\n- B) ERRADA — Frequência mínima é **75%** (não 80%).\n- **C) CORRETA** — Ordem completa com as 5 penalidades, conforme Deliberação 11/2015.\n- D) ERRADA — Sindicância é investigação preliminar. PAD é o processo punitivo formal.\n\n### Questão 5 | Resposta: **C**\n- A) ERRADA — Integrada NÃO é "simples soma" — exige projeto pedagógico único e orgânico.\n- B) ERRADA — Isso descreve CONCOMITANTE. Subsequente = já concluiu o EM.\n- **C) CORRETA** — Art. 36-C LDB: mesma instituição, distintas, ou com convênio.\n- D) ERRADA — Decreto 2.208/97 foi REVOGADO pelo 5.154/2004.\n\n---\n\n### Resultado\n- **5/5**: Excelente! Pronta para a prova.\n- **4/5**: Ótimo! Revise o tema da questão errada.\n- **3/5**: Bom, mas revise os blocos com mais atenção.\n- **2/5 ou menos**: Releia os resumos e foque nas tabelas e pegadinhas.\n\n`;
-document.getElementById('content').innerHTML = marked.parse(md);
+// ====== QUESTION DATA ======
+const QUESTIONS = [
+  // BLOCK 1: LINGUA PORTUGUESA
+  {
+    id:"pt-01", block:1, blockName:"Lingua Portuguesa", topic:"Regencia Verbal",
+    question:"Assinale a alternativa que contem ERRO de regencia verbal:",
+    options:[
+      {key:"A", text:"Assistimos ao jogo do Brasil com entusiasmo."},
+      {key:"B", text:"O diretor aspirava ao cargo de presidente."},
+      {key:"C", text:"Prefiro estudar do que trabalhar."},
+      {key:"D", text:"Todos obedeceram ao regulamento interno."}
+    ],
+    correct:"C",
+    explanation:"O verbo 'preferir' exige a preposicao 'a', nunca 'do que'. A forma correta e: 'Prefiro estudar A trabalhar'. Esse e um dos erros mais cobrados em concursos.",
+    studySuggestion:"Revise Regencia Verbal, especialmente os verbos: preferir (a, nao 'do que'), assistir (a), visar (a), obedecer (a), namorar (sem preposicao)."
+  },
+  {
+    id:"pt-02", block:1, blockName:"Lingua Portuguesa", topic:"Figuras de Linguagem",
+    question:"Na frase 'O sol sorriu para nos naquela manha', a figura de linguagem presente e:",
+    options:[
+      {key:"A", text:"Metafora"},
+      {key:"B", text:"Metonimia"},
+      {key:"C", text:"Prosopopeia (Personificacao)"},
+      {key:"D", text:"Hiperbole"}
+    ],
+    correct:"C",
+    explanation:"Prosopopeia (ou personificacao) e a figura de linguagem que atribui caracteristicas humanas a seres inanimados ou irracionais. 'Sorrir' e uma acao humana atribuida ao sol.",
+    studySuggestion:"Estude as principais figuras de linguagem: metafora (comparacao implicita), metonimia (parte pelo todo), prosopopeia (personificacao), hiperbole (exagero), eufemismo (suavizacao)."
+  },
+  {
+    id:"pt-03", block:1, blockName:"Lingua Portuguesa", topic:"Crase",
+    question:"Em qual alternativa o uso da crase esta CORRETO?",
+    options:[
+      {key:"A", text:"Fui a praia ontem."},
+      {key:"B", text:"Refiro-me a Vossa Excelencia."},
+      {key:"C", text:"Estou disposto a ajudar voce."},
+      {key:"D", text:"Chegaremos a cidade ao meio-dia."}
+    ],
+    correct:"D",
+    explanation:"'Chegaremos a cidade' exige crase porque o verbo 'chegar' pede a preposicao 'a' e 'cidade' e substantivo feminino definido. Em A, falta crase ('a praia'). Em B, nao ha crase antes de pronome de tratamento. Em C, nao ha crase antes de verbo.",
+    studySuggestion:"Regras de crase: ocorre quando ha preposicao 'a' + artigo 'a'. Nunca ocorre antes de: verbos, pronomes de tratamento, palavras masculinas. Sempre ocorre em: locucoes adverbiais femininas (as vezes, a noite)."
+  },
+  {
+    id:"pt-04", block:1, blockName:"Lingua Portuguesa", topic:"Concordancia Verbal",
+    question:"Assinale a frase com concordancia verbal CORRETA:",
+    options:[
+      {key:"A", text:"Fazem cinco anos que nao viajo."},
+      {key:"B", text:"Houveram muitos problemas na reuniao."},
+      {key:"C", text:"Existem vagas disponiveis para o cargo."},
+      {key:"D", text:"Haviam muitas pessoas na fila."}
+    ],
+    correct:"C",
+    explanation:"'Existem vagas' esta correto porque o verbo 'existir' concorda com o sujeito 'vagas' (plural). Ja os verbos 'haver' (sentido de existir) e 'fazer' (tempo) sao impessoais e ficam no singular: 'Faz cinco anos', 'Houve muitos problemas', 'Havia muitas pessoas'.",
+    studySuggestion:"Verbos impessoais (sempre no singular): haver (= existir), fazer (tempo/clima), bastar, chover. Verbos pessoais (concordam com sujeito): existir, acontecer, ocorrer, surgir."
+  },
+  {
+    id:"pt-05", block:1, blockName:"Lingua Portuguesa", topic:"Colocacao Pronominal",
+    question:"A colocacao pronominal esta CORRETA em:",
+    options:[
+      {key:"A", text:"Me disseram que a reuniao foi cancelada."},
+      {key:"B", text:"Ninguem disse-me a verdade."},
+      {key:"C", text:"Nao entregaram-me o documento."},
+      {key:"D", text:"Tudo se resolve com dialogo."}
+    ],
+    correct:"D",
+    explanation:"Pronomes indefinidos (tudo, nada, alguem, ninguem) atraem o pronome obliquo para antes do verbo (proclise). 'Tudo SE resolve' esta correto. Em A, nao se inicia frase com pronome obliquo. Em B e C, palavras negativas (ninguem, nao) atraem proclise: 'Ninguem me disse', 'Nao me entregaram'.",
+    studySuggestion:"Proclise (antes do verbo): palavras negativas, pronomes indefinidos/relativos, adverbios, conjuncoes subordinativas. Enclise (depois): inicio de frase, apos pausa, imperativo afirmativo."
+  },
+  {
+    id:"pt-06", block:1, blockName:"Lingua Portuguesa", topic:"Interpretacao de Texto",
+    question:"Em um texto argumentativo, a tese e:",
+    options:[
+      {key:"A", text:"O resumo do texto apresentado na conclusao."},
+      {key:"B", text:"A ideia central que o autor defende ao longo do texto."},
+      {key:"C", text:"O primeiro paragrafo do texto."},
+      {key:"D", text:"Um exemplo usado para ilustrar um fato."}
+    ],
+    correct:"B",
+    explanation:"A tese e a ideia central, o ponto de vista que o autor defende e para o qual apresenta argumentos ao longo do texto. Nao se confunde com a introducao (que pode conter a tese, mas nao e a tese em si) nem com exemplos (que sao recursos argumentativos).",
+    studySuggestion:"Estrutura do texto argumentativo: tese (ideia defendida), argumentos (provas/razoes), conclusao (retomada da tese). Diferencie: tese vs. tema vs. titulo."
+  },
+  {
+    id:"pt-07", block:1, blockName:"Lingua Portuguesa", topic:"Coesao Textual",
+    question:"Qual conectivo estabelece relacao de CONCESSAO?",
+    options:[
+      {key:"A", text:"Portanto"},
+      {key:"B", text:"Embora"},
+      {key:"C", text:"Porque"},
+      {key:"D", text:"Conforme"}
+    ],
+    correct:"B",
+    explanation:"'Embora' e uma conjuncao concessiva — indica que algo acontece apesar de uma circunstancia contraria. 'Portanto' = conclusao, 'Porque' = causa, 'Conforme' = conformidade.",
+    studySuggestion:"Conjuncoes por tipo: concessivas (embora, apesar de, ainda que), causais (porque, pois, visto que), conclusivas (portanto, logo, assim), adversativas (mas, porem, contudo)."
+  },
+  {
+    id:"pt-08", block:1, blockName:"Lingua Portuguesa", topic:"Acentuacao",
+    question:"Todas as palavras estao corretamente acentuadas em:",
+    options:[
+      {key:"A", text:"Juiz, raiz, saude, bau"},
+      {key:"B", text:"Hifen, item, parabens, tambem"},
+      {key:"C", text:"Util, facil, amavel, dificil"},
+      {key:"D", text:"Cafe, sofa, vovo, cipo"}
+    ],
+    correct:"C",
+    explanation:"Todas sao paroxitonas terminadas em 'l' (util, facil, amavel, dificil), que sao sempre acentuadas. Em A, 'juiz' e 'raiz' NAO sao acentuadas (oxitonas em 'iz'). Em B, 'item' nao tem acento. Em D, precisa verificar caso a caso.",
+    studySuggestion:"Regras de acentuacao: oxitonas (acentua em a/e/o/em/ens), paroxitonas (acentua em l/n/r/x/i/us/um/ao/ditongo), proparoxitonas (todas acentuadas)."
+  },
+  {
+    id:"pt-09", block:1, blockName:"Lingua Portuguesa", topic:"Pontuacao",
+    question:"O uso da VIRGULA esta INCORRETO em:",
+    options:[
+      {key:"A", text:"Maria, minha amiga, chegou cedo."},
+      {key:"B", text:"Estudou muito, portanto passou no concurso."},
+      {key:"C", text:"O candidato que estudou, foi aprovado."},
+      {key:"D", text:"Em 2026, o concurso sera realizado."}
+    ],
+    correct:"C",
+    explanation:"Nao se separa o sujeito do verbo com virgula. Em 'O candidato que estudou foi aprovado', a oracao 'que estudou' e restritiva (sem virgula). A virgula entre 'estudou' e 'foi' separa indevidamente sujeito e predicado.",
+    studySuggestion:"Virgula: NUNCA entre sujeito e verbo, NUNCA entre verbo e complemento. SEMPRE em: apostos explicativos, vocativos, adjuntos adverbiais deslocados, oracoes coordenadas."
+  },
+  {
+    id:"pt-10", block:1, blockName:"Lingua Portuguesa", topic:"Classes de Palavras",
+    question:"Na frase 'A beleza natural daquela cidade encantou os turistas', a palavra 'natural' e:",
+    options:[
+      {key:"A", text:"Substantivo"},
+      {key:"B", text:"Adverbio"},
+      {key:"C", text:"Adjetivo"},
+      {key:"D", text:"Pronome"}
+    ],
+    correct:"C",
+    explanation:"'Natural' e um adjetivo porque qualifica o substantivo 'beleza', atribuindo-lhe uma caracteristica. Adjetivos modificam substantivos indicando qualidade, estado ou propriedade.",
+    studySuggestion:"Classes de palavras: substantivo (nomeia), adjetivo (qualifica substantivo), adverbio (modifica verbo/adjetivo/adverbio), pronome (substitui/acompanha substantivo)."
+  },
+
+  // BLOCK 2: MATEMATICA
+  {
+    id:"mt-01", block:2, blockName:"Matematica", topic:"Porcentagem",
+    question:"Um produto custava R$ 80,00 e teve um aumento de 15%. Qual o novo preco?",
+    options:[
+      {key:"A", text:"R$ 90,00"},
+      {key:"B", text:"R$ 92,00"},
+      {key:"C", text:"R$ 95,00"},
+      {key:"D", text:"R$ 88,00"}
+    ],
+    correct:"B",
+    explanation:"15% de R$ 80 = 0,15 x 80 = R$ 12,00. Novo preco = 80 + 12 = R$ 92,00. Outra forma: 80 x 1,15 = 92.",
+    studySuggestion:"Porcentagem: para aumento, multiplique por (1 + taxa). Para desconto, multiplique por (1 - taxa). Exemplo: aumento de 20% = x 1,20; desconto de 10% = x 0,90."
+  },
+  {
+    id:"mt-02", block:2, blockName:"Matematica", topic:"Raciocinio Logico",
+    question:"Se 'Todo funcionario publico e concursado' e verdadeira, entao e CORRETO afirmar:",
+    options:[
+      {key:"A", text:"Todo concursado e funcionario publico."},
+      {key:"B", text:"Quem nao e concursado nao e funcionario publico."},
+      {key:"C", text:"Quem nao e funcionario publico nao e concursado."},
+      {key:"D", text:"Existem funcionarios publicos nao concursados."}
+    ],
+    correct:"B",
+    explanation:"Se todo A e B, entao quem nao e B nao pode ser A (contrapositiva). Se todo funcionario e concursado, quem NAO e concursado NAO pode ser funcionario publico. A inversa ('todo concursado e funcionario') nao e necessariamente verdadeira.",
+    studySuggestion:"Logica proposicional: a contrapositiva de 'Se P entao Q' e 'Se nao-Q entao nao-P' (sempre verdadeira). A inversa 'Se Q entao P' NEM SEMPRE e verdadeira."
+  },
+  {
+    id:"mt-03", block:2, blockName:"Matematica", topic:"Juros Simples",
+    question:"Um capital de R$ 2.000,00 aplicado a juros simples de 3% ao mes rende quanto em 5 meses?",
+    options:[
+      {key:"A", text:"R$ 300,00"},
+      {key:"B", text:"R$ 250,00"},
+      {key:"C", text:"R$ 350,00"},
+      {key:"D", text:"R$ 200,00"}
+    ],
+    correct:"A",
+    explanation:"Juros simples: J = C x i x t = 2000 x 0,03 x 5 = R$ 300,00. Nos juros simples, a taxa incide sempre sobre o capital inicial.",
+    studySuggestion:"Formula juros simples: J = C x i x t (capital x taxa x tempo). Montante: M = C + J = C(1 + i.t). Atencao: taxa e tempo devem estar na mesma unidade."
+  },
+  {
+    id:"mt-04", block:2, blockName:"Matematica", topic:"Juros Compostos",
+    question:"R$ 1.000,00 aplicados a juros compostos de 10% ao mes por 2 meses resultam em montante de:",
+    options:[
+      {key:"A", text:"R$ 1.200,00"},
+      {key:"B", text:"R$ 1.210,00"},
+      {key:"C", text:"R$ 1.100,00"},
+      {key:"D", text:"R$ 1.220,00"}
+    ],
+    correct:"B",
+    explanation:"Juros compostos: M = C(1+i)^t = 1000 x (1,10)^2 = 1000 x 1,21 = R$ 1.210,00. A diferenca para juros simples (que daria R$ 1.200) e de R$ 10 (juros sobre juros).",
+    studySuggestion:"Formula juros compostos: M = C(1+i)^t. A diferenca para simples: nos compostos, os juros de cada periodo incidem sobre o montante do periodo anterior (juros sobre juros)."
+  },
+  {
+    id:"mt-05", block:2, blockName:"Matematica", topic:"Regra de Tres",
+    question:"Se 4 operarios fazem um servico em 12 dias, quantos dias levarao 6 operarios para fazer o mesmo servico?",
+    options:[
+      {key:"A", text:"8 dias"},
+      {key:"B", text:"10 dias"},
+      {key:"C", text:"18 dias"},
+      {key:"D", text:"6 dias"}
+    ],
+    correct:"A",
+    explanation:"Grandezas inversamente proporcionais (mais operarios = menos dias). 4 x 12 = 6 x d => d = 48/6 = 8 dias.",
+    studySuggestion:"Regra de tres: identifique se as grandezas sao diretamente (sobem juntas) ou inversamente (uma sobe, outra desce) proporcionais. Inversa: multiplique cruzado."
+  },
+  {
+    id:"mt-06", block:2, blockName:"Matematica", topic:"Equacao 1o Grau",
+    question:"Resolvendo a equacao 3x - 7 = 2x + 5, o valor de x e:",
+    options:[
+      {key:"A", text:"12"},
+      {key:"B", text:"2"},
+      {key:"C", text:"-12"},
+      {key:"D", text:"7"}
+    ],
+    correct:"A",
+    explanation:"3x - 7 = 2x + 5 => 3x - 2x = 5 + 7 => x = 12. Isole x passando os termos com x para um lado e os numericos para o outro.",
+    studySuggestion:"Equacao 1o grau: isole a incognita. Ao trocar de lado, inverte a operacao (+vira-, x vira /). Confira substituindo o resultado na equacao original."
+  },
+  {
+    id:"mt-07", block:2, blockName:"Matematica", topic:"Equacao 2o Grau",
+    question:"As raizes da equacao x^2 - 5x + 6 = 0 sao:",
+    options:[
+      {key:"A", text:"x = 1 e x = 6"},
+      {key:"B", text:"x = 2 e x = 3"},
+      {key:"C", text:"x = -2 e x = -3"},
+      {key:"D", text:"x = 5 e x = 1"}
+    ],
+    correct:"B",
+    explanation:"Usando Bhaskara: delta = 25 - 24 = 1. x = (5 +/- 1) / 2. x1 = 3, x2 = 2. Ou por Soma e Produto: soma = 5, produto = 6 => 2 e 3.",
+    studySuggestion:"Equacao 2o grau (ax^2+bx+c=0): delta = b^2 - 4ac. x = (-b +/- raiz(delta)) / 2a. Atalho: se a=1, soma das raizes = -b e produto = c."
+  },
+  {
+    id:"mt-08", block:2, blockName:"Matematica", topic:"Probabilidade",
+    question:"Ao lancar um dado honesto, qual a probabilidade de obter um numero maior que 4?",
+    options:[
+      {key:"A", text:"1/2"},
+      {key:"B", text:"1/3"},
+      {key:"C", text:"2/3"},
+      {key:"D", text:"1/6"}
+    ],
+    correct:"B",
+    explanation:"Numeros maiores que 4 no dado: 5 e 6 (2 resultados). Total de resultados possiveis: 6. Probabilidade = 2/6 = 1/3.",
+    studySuggestion:"Probabilidade = casos favoraveis / casos possiveis. Dado: 6 faces. Baralho: 52 cartas. Moeda: 2 faces. Eventos independentes: multiplique as probabilidades."
+  },
+  {
+    id:"mt-09", block:2, blockName:"Matematica", topic:"MMC e MDC",
+    question:"O MMC de 12 e 18 e:",
+    options:[
+      {key:"A", text:"6"},
+      {key:"B", text:"36"},
+      {key:"C", text:"72"},
+      {key:"D", text:"24"}
+    ],
+    correct:"B",
+    explanation:"Fatorando: 12 = 2^2 x 3 e 18 = 2 x 3^2. MMC = pega os maiores expoentes: 2^2 x 3^2 = 4 x 9 = 36.",
+    studySuggestion:"MMC: decomponha em fatores primos, pegue os MAIORES expoentes. MDC: pegue os MENORES expoentes comuns. Relacao: MMC x MDC = produto dos numeros."
+  },
+  {
+    id:"mt-10", block:2, blockName:"Matematica", topic:"Progressao Aritmetica",
+    question:"Em uma PA de razao 3, se o primeiro termo e 2, qual e o 10o termo?",
+    options:[
+      {key:"A", text:"29"},
+      {key:"B", text:"32"},
+      {key:"C", text:"27"},
+      {key:"D", text:"30"}
+    ],
+    correct:"A",
+    explanation:"Formula do termo geral da PA: an = a1 + (n-1).r = 2 + (10-1).3 = 2 + 27 = 29.",
+    studySuggestion:"PA: an = a1 + (n-1).r. Soma dos n termos: Sn = (a1 + an).n / 2. PG: an = a1 . q^(n-1). Soma PG finita: Sn = a1(q^n - 1)/(q - 1)."
+  },
+
+  // BLOCK 3: CONHECIMENTOS GERAIS
+  {
+    id:"cg-01", block:3, blockName:"Conhecimentos Gerais", topic:"Piratininga-SP",
+    question:"O municipio de Piratininga-SP esta localizado em qual regiao do estado de Sao Paulo?",
+    options:[
+      {key:"A", text:"Regiao Metropolitana de Sao Paulo"},
+      {key:"B", text:"Regiao Centro-Oeste Paulista"},
+      {key:"C", text:"Litoral Sul Paulista"},
+      {key:"D", text:"Vale do Paraiba"}
+    ],
+    correct:"B",
+    explanation:"Piratininga e um municipio localizado na regiao Centro-Oeste Paulista, proximo a Bauru. Faz parte da Mesorregiao de Bauru e da Microrregiao de Bauru.",
+    studySuggestion:"Estude a geografia de Piratininga: localizacao (centro-oeste paulista, proxima a Bauru), populacao (~13 mil hab.), economia (agropecuaria), clima (tropical), rio principal (Rio Batalha)."
+  },
+  {
+    id:"cg-02", block:3, blockName:"Conhecimentos Gerais", topic:"Atualidades - Politica",
+    question:"A Reforma Tributaria aprovada no Brasil em 2023 criou quais novos impostos para substituir tributos como ICMS e ISS?",
+    options:[
+      {key:"A", text:"IVA e CPMF"},
+      {key:"B", text:"CBS e IBS"},
+      {key:"C", text:"IOF e IPVA"},
+      {key:"D", text:"PIS e COFINS unificados"}
+    ],
+    correct:"B",
+    explanation:"A Reforma Tributaria (EC 132/2023) criou a CBS (Contribuicao sobre Bens e Servicos - federal) e o IBS (Imposto sobre Bens e Servicos - estadual/municipal), que substituirao PIS, COFINS, IPI, ICMS e ISS. Modelo de IVA dual.",
+    studySuggestion:"Reforma Tributaria 2023: CBS (federal, substitui PIS/COFINS/IPI) + IBS (estados/municipios, substitui ICMS/ISS). Transicao: 2026-2033. Imposto Seletivo para itens nocivos."
+  },
+  {
+    id:"cg-03", block:3, blockName:"Conhecimentos Gerais", topic:"Atualidades - Tecnologia",
+    question:"A sigla IA (Inteligencia Artificial) generativa, que ganhou destaque mundial a partir de 2022/2023, refere-se a sistemas capazes de:",
+    options:[
+      {key:"A", text:"Apenas reconhecer imagens em cameras de seguranca."},
+      {key:"B", text:"Criar conteudo novo (textos, imagens, codigos) a partir de padroes aprendidos."},
+      {key:"C", text:"Substituir completamente todos os empregos humanos."},
+      {key:"D", text:"Funcionar exclusivamente sem conexao com a internet."}
+    ],
+    correct:"B",
+    explanation:"IA generativa (como ChatGPT, DALL-E, Claude) cria conteudo novo — textos, imagens, musicas, codigos — a partir de padroes aprendidos em grandes volumes de dados. Nao e limitada a reconhecimento, nem substitui todos os empregos.",
+    studySuggestion:"IA generativa: ChatGPT (OpenAI, 2022), capaz de gerar conteudo. Debates atuais: regulamentacao, deepfakes, impacto no mercado de trabalho, uso na educacao. UE aprovou AI Act em 2024."
+  },
+  {
+    id:"cg-04", block:3, blockName:"Conhecimentos Gerais", topic:"Sustentabilidade",
+    question:"Os ODS (Objetivos de Desenvolvimento Sustentavel) da ONU sao compostos por quantos objetivos a serem alcancados ate 2030?",
+    options:[
+      {key:"A", text:"10 objetivos"},
+      {key:"B", text:"15 objetivos"},
+      {key:"C", text:"17 objetivos"},
+      {key:"D", text:"20 objetivos"}
+    ],
+    correct:"C",
+    explanation:"A Agenda 2030 da ONU possui 17 Objetivos de Desenvolvimento Sustentavel (ODS), que abrangem erradicacao da pobreza, educacao de qualidade, igualdade de genero, acao climatica, entre outros.",
+    studySuggestion:"ODS/Agenda 2030: 17 objetivos, 169 metas. Principais: 1-Pobreza, 4-Educacao, 5-Igualdade de genero, 6-Agua, 13-Clima, 16-Paz e Justica. Aprovados em 2015 pela Assembleia Geral da ONU."
+  },
+  {
+    id:"cg-05", block:3, blockName:"Conhecimentos Gerais", topic:"Atualidades - Economia",
+    question:"O PIX, sistema de pagamentos instantaneos criado pelo Banco Central do Brasil, foi lancado em que ano?",
+    options:[
+      {key:"A", text:"2018"},
+      {key:"B", text:"2019"},
+      {key:"C", text:"2020"},
+      {key:"D", text:"2021"}
+    ],
+    correct:"C",
+    explanation:"O PIX foi lancado em 16 de novembro de 2020 pelo Banco Central. Permite transferencias instantaneas 24h, 7 dias por semana, entre pessoas e empresas, de forma gratuita para pessoa fisica.",
+    studySuggestion:"PIX: lancado nov/2020, gratuito para PF, 24/7, chaves (CPF, email, telefone, aleatoria). Drex (Real Digital) e a CBDC brasileira em desenvolvimento pelo BC."
+  },
+  {
+    id:"cg-06", block:3, blockName:"Conhecimentos Gerais", topic:"Relacoes Internacionais",
+    question:"O grupo BRICS, apos a expansao em 2024, passou a contar com novos membros. Qual destes paises aderiu ao bloco?",
+    options:[
+      {key:"A", text:"Mexico"},
+      {key:"B", text:"Arabia Saudita"},
+      {key:"C", text:"Turquia"},
+      {key:"D", text:"Nigeria"}
+    ],
+    correct:"B",
+    explanation:"Em janeiro de 2024, o BRICS expandiu incorporando Arabia Saudita, Emirados Arabes, Egito, Etiopia e Ira (embora a Arabia Saudita ainda esteja em processo de formalizacao). O bloco original era Brasil, Russia, India, China e Africa do Sul.",
+    studySuggestion:"BRICS+: expansao 2024 com Arabia Saudita, EAU, Egito, Etiopia, Ira. Objetivo: multipolaridade, alternativa ao G7. Presidencia brasileira 2025. NDB (Novo Banco de Desenvolvimento)."
+  },
+  {
+    id:"cg-07", block:3, blockName:"Conhecimentos Gerais", topic:"Etica no Trabalho",
+    question:"No servico publico, o principio da IMPESSOALIDADE significa que:",
+    options:[
+      {key:"A", text:"O servidor pode usar o cargo para beneficio pessoal desde que nao prejudique ninguem."},
+      {key:"B", text:"A administracao deve tratar todos igualmente, sem favorecimentos ou perseguicoes."},
+      {key:"C", text:"Os atos administrativos nao precisam ser publicados."},
+      {key:"D", text:"O servidor nao precisa se identificar nos documentos oficiais."}
+    ],
+    correct:"B",
+    explanation:"Impessoalidade significa que a Administracao Publica deve atuar sem discriminacoes, favorecimentos ou perseguicoes. Os atos sao da instituicao, nao da pessoa do servidor. E um dos 5 principios do art. 37 da CF (LIMPE).",
+    studySuggestion:"Principios LIMPE (art. 37, CF): Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiencia. Impessoalidade = isonomia de tratamento, nao promover-se com atos do cargo."
+  },
+  {
+    id:"cg-08", block:3, blockName:"Conhecimentos Gerais", topic:"Atualidades - Saude",
+    question:"A pandemia de COVID-19, declarada pela OMS em 2020, teve seu estado de emergencia internacional encerrado pela organizacao em:",
+    options:[
+      {key:"A", text:"Dezembro de 2022"},
+      {key:"B", text:"Marco de 2023"},
+      {key:"C", text:"Maio de 2023"},
+      {key:"D", text:"Janeiro de 2024"}
+    ],
+    correct:"C",
+    explanation:"A OMS declarou o fim da Emergencia de Saude Publica de Importancia Internacional (ESPII) por COVID-19 em 5 de maio de 2023, apos mais de 3 anos de pandemia.",
+    studySuggestion:"COVID-19: pandemia declarada em mar/2020, emergencia encerrada em mai/2023. Vacinacao iniciou dez/2020. OMS = Organizacao Mundial da Saude (sede Genebra)."
+  },
+  {
+    id:"cg-09", block:3, blockName:"Conhecimentos Gerais", topic:"Meio Ambiente",
+    question:"O Acordo de Paris (2015) sobre mudancas climaticas tem como principal meta:",
+    options:[
+      {key:"A", text:"Eliminar totalmente o uso de combustiveis fosseis ate 2025."},
+      {key:"B", text:"Limitar o aquecimento global a 1,5C acima dos niveis pre-industriais."},
+      {key:"C", text:"Proibir o desmatamento em todos os paises signatarios."},
+      {key:"D", text:"Criar um imposto global sobre emissoes de carbono."}
+    ],
+    correct:"B",
+    explanation:"O Acordo de Paris (COP21, 2015) busca limitar o aumento da temperatura global a bem abaixo de 2C, preferencialmente 1,5C, em relacao aos niveis pre-industriais. Cada pais define suas metas (NDCs).",
+    studySuggestion:"Acordo de Paris: meta 1,5C, NDCs (contribuicoes nacionais), financiamento climatico. COP28 (2023, Dubai): acordo historico sobre transicao dos combustiveis fosseis."
+  },
+  {
+    id:"cg-10", block:3, blockName:"Conhecimentos Gerais", topic:"Piratininga - Historia",
+    question:"O nome 'Piratininga' tem origem na lingua tupi e significa:",
+    options:[
+      {key:"A", text:"Rio de aguas claras"},
+      {key:"B", text:"Terra do peixe seco / peixe ao sol"},
+      {key:"C", text:"Montanha verde"},
+      {key:"D", text:"Campo de flores"}
+    ],
+    correct:"B",
+    explanation:"'Piratininga' vem do tupi e significa 'peixe seco' ou 'peixe posto a secar ao sol' (pira = peixe + tininga = seco). E o mesmo significado do antigo nome de Sao Paulo (Sao Paulo de Piratininga).",
+    studySuggestion:"Historia de Piratininga-SP: fundacao, origem do nome (tupi: peixe seco), colonizacao, economia historica. Simbolos municipais: bandeira, brasao, hino."
+  },
+
+  // BLOCK 4: INFORMATICA
+  {
+    id:"if-01", block:4, blockName:"Informatica", topic:"Excel - Formulas",
+    question:"No Microsoft Excel, a formula =SOMA(A1:A5) realiza qual operacao?",
+    options:[
+      {key:"A", text:"Calcula a media dos valores de A1 ate A5."},
+      {key:"B", text:"Soma todos os valores das celulas de A1 ate A5."},
+      {key:"C", text:"Conta quantas celulas de A1 a A5 contem numeros."},
+      {key:"D", text:"Retorna o maior valor entre A1 e A5."}
+    ],
+    correct:"B",
+    explanation:"=SOMA(A1:A5) soma todos os valores nas celulas A1, A2, A3, A4 e A5. O ':' indica um intervalo continuo. MEDIA calcula a media, CONT.NUM conta celulas numericas, MAXIMO retorna o maior.",
+    studySuggestion:"Funcoes Excel essenciais: SOMA (adiciona), MEDIA (media aritmetica), MINIMO/MAXIMO (menor/maior valor), SE (condicional), CONT.NUM (conta numeros), CONT.VALORES (conta nao-vazias)."
+  },
+  {
+    id:"if-02", block:4, blockName:"Informatica", topic:"Seguranca da Informacao",
+    question:"Ransomware e um tipo de malware que:",
+    options:[
+      {key:"A", text:"Registra tudo que e digitado no teclado."},
+      {key:"B", text:"Criptografa arquivos e exige pagamento para libera-los."},
+      {key:"C", text:"Se replica automaticamente pela rede sem acao do usuario."},
+      {key:"D", text:"Exibe propagandas indesejadas no navegador."}
+    ],
+    correct:"B",
+    explanation:"Ransomware ('ransom' = resgate) criptografa os arquivos da vitima e exige pagamento (geralmente em criptomoeda) para fornecer a chave de descriptografia. Exemplos: WannaCry, Petya.",
+    studySuggestion:"Malwares: virus (precisa de hospedeiro), worm (se replica sozinho), trojan (se disfarça), ransomware (sequestra dados), spyware (espiona), keylogger (captura teclas), adware (propagandas)."
+  },
+  {
+    id:"if-03", block:4, blockName:"Informatica", topic:"Atalhos Windows",
+    question:"No Windows 10/11, o atalho Ctrl+Z serve para:",
+    options:[
+      {key:"A", text:"Fechar a janela atual."},
+      {key:"B", text:"Selecionar tudo."},
+      {key:"C", text:"Desfazer a ultima acao."},
+      {key:"D", text:"Salvar o documento."}
+    ],
+    correct:"C",
+    explanation:"Ctrl+Z e o atalho universal para 'Desfazer' (Undo) a ultima acao realizada. Funciona em praticamente todos os programas. Ctrl+W fecha aba/janela, Ctrl+A seleciona tudo, Ctrl+S salva.",
+    studySuggestion:"Atalhos essenciais: Ctrl+C (copiar), Ctrl+V (colar), Ctrl+X (recortar), Ctrl+Z (desfazer), Ctrl+S (salvar), Ctrl+A (selecionar tudo), Ctrl+P (imprimir), Alt+Tab (alternar janelas)."
+  },
+  {
+    id:"if-04", block:4, blockName:"Informatica", topic:"Hardware e Software",
+    question:"A memoria RAM de um computador e classificada como:",
+    options:[
+      {key:"A", text:"Memoria permanente de armazenamento."},
+      {key:"B", text:"Memoria volatil de acesso rapido."},
+      {key:"C", text:"Dispositivo de entrada."},
+      {key:"D", text:"Software de sistema."}
+    ],
+    correct:"B",
+    explanation:"A RAM (Random Access Memory) e uma memoria volatil — perde os dados quando o computador e desligado. Serve para armazenar temporariamente dados e programas em execucao, com acesso muito rapido.",
+    studySuggestion:"Memorias: RAM (volatil, rapida, temporaria), ROM (nao-volatil, firmware), HD/SSD (armazenamento permanente). Hierarquia de velocidade: registradores > cache > RAM > SSD > HD."
+  },
+  {
+    id:"if-05", block:4, blockName:"Informatica", topic:"Redes de Computadores",
+    question:"Uma rede LAN (Local Area Network) e caracterizada por:",
+    options:[
+      {key:"A", text:"Cobrir grandes distancias, como paises inteiros."},
+      {key:"B", text:"Conectar dispositivos em uma area geografica limitada, como um escritorio."},
+      {key:"C", text:"Ser exclusivamente sem fio (wireless)."},
+      {key:"D", text:"Necessitar obrigatoriamente de conexao com a internet."}
+    ],
+    correct:"B",
+    explanation:"LAN (Rede Local) conecta dispositivos em area limitada: escritorio, escola, residencia. WAN (Wide Area Network) cobre grandes areas. LAN pode ser cabeada ou wireless, e nao exige internet.",
+    studySuggestion:"Tipos de rede: LAN (local, escritorio), MAN (metropolitana, cidade), WAN (ampla, paises). Equipamentos: modem (converte sinal), roteador (direciona pacotes), switch (conecta dispositivos na LAN)."
+  },
+  {
+    id:"if-06", block:4, blockName:"Informatica", topic:"Correio Eletronico",
+    question:"No envio de e-mail, o campo CCO (Copia Carbono Oculta) serve para:",
+    options:[
+      {key:"A", text:"Enviar copia para destinatarios que ficarao visiveis para todos."},
+      {key:"B", text:"Enviar copia para destinatarios sem que os outros saibam."},
+      {key:"C", text:"Criptografar a mensagem enviada."},
+      {key:"D", text:"Solicitar confirmacao de leitura."}
+    ],
+    correct:"B",
+    explanation:"CCO (BCC em ingles) envia uma copia do e-mail para destinatarios de forma oculta — os demais destinatarios nao veem quem esta em CCO. CC (copia carbono) e visivel para todos.",
+    studySuggestion:"Campos de e-mail: Para (destinatario principal), CC (copia visivel a todos), CCO/BCC (copia oculta). Spam = mensagem indesejada. Phishing = e-mail falso para roubar dados."
+  },
+  {
+    id:"if-07", block:4, blockName:"Informatica", topic:"Microsoft Word",
+    question:"No Microsoft Word, para alterar as margens do documento, voce deve acessar:",
+    options:[
+      {key:"A", text:"Guia Inserir > Margens"},
+      {key:"B", text:"Guia Layout (ou Layout da Pagina) > Margens"},
+      {key:"C", text:"Guia Pagina Inicial > Configurar Pagina"},
+      {key:"D", text:"Guia Exibicao > Margens"}
+    ],
+    correct:"B",
+    explanation:"As margens sao configuradas na guia 'Layout' (ou 'Layout da Pagina' em versoes anteriores), no grupo 'Configurar Pagina'. La tambem se encontram orientacao (retrato/paisagem) e tamanho do papel.",
+    studySuggestion:"Word - guias principais: Pagina Inicial (fonte, paragrafo), Inserir (tabela, imagem, cabecalho), Layout (margens, orientacao, colunas), Revisao (ortografia, controlar alteracoes)."
+  },
+  {
+    id:"if-08", block:4, blockName:"Informatica", topic:"PowerPoint",
+    question:"No Microsoft PowerPoint, para iniciar a apresentacao a partir do primeiro slide, usa-se:",
+    options:[
+      {key:"A", text:"Ctrl+P"},
+      {key:"B", text:"F5"},
+      {key:"C", text:"Ctrl+F5"},
+      {key:"D", text:"Alt+F4"}
+    ],
+    correct:"B",
+    explanation:"F5 inicia a apresentacao do inicio. Shift+F5 inicia a partir do slide atual. Ctrl+P abre a impressao. Alt+F4 fecha o programa.",
+    studySuggestion:"PowerPoint: F5 (apresentar do inicio), Shift+F5 (do slide atual), layouts (titulo, conteudo, em branco), transicoes (efeitos entre slides), animacoes (efeitos em objetos)."
+  },
+  {
+    id:"if-09", block:4, blockName:"Informatica", topic:"Internet e Navegadores",
+    question:"O protocolo HTTPS, diferente do HTTP, oferece:",
+    options:[
+      {key:"A", text:"Maior velocidade de carregamento das paginas."},
+      {key:"B", text:"Comunicacao criptografada entre navegador e servidor."},
+      {key:"C", text:"Acesso exclusivo a sites governamentais."},
+      {key:"D", text:"Bloqueio automatico de virus."}
+    ],
+    correct:"B",
+    explanation:"HTTPS (HTTP Secure) utiliza criptografia SSL/TLS para proteger a comunicacao entre o navegador e o servidor web. Garante confidencialidade e integridade dos dados transmitidos (senhas, dados pessoais).",
+    studySuggestion:"Protocolos web: HTTP (sem criptografia), HTTPS (com SSL/TLS, cadeado no navegador). URL = endereco do site. Navegadores: Chrome, Firefox, Edge. Download = receber, Upload = enviar."
+  },
+  {
+    id:"if-10", block:4, blockName:"Informatica", topic:"LGPD",
+    question:"A LGPD (Lei Geral de Protecao de Dados) tem como principal objetivo:",
+    options:[
+      {key:"A", text:"Bloquear o acesso a internet em orgaos publicos."},
+      {key:"B", text:"Proteger os direitos de liberdade e privacidade dos titulares de dados pessoais."},
+      {key:"C", text:"Proibir empresas de coletarem qualquer tipo de dado."},
+      {key:"D", text:"Regular exclusivamente o comercio eletronico."}
+    ],
+    correct:"B",
+    explanation:"A LGPD (Lei 13.709/2018) protege os direitos fundamentais de liberdade e privacidade, regulando o tratamento de dados pessoais por pessoas, empresas e orgaos publicos. Nao proibe a coleta, mas exige base legal e consentimento.",
+    studySuggestion:"LGPD: Lei 13.709/2018, vigente desde 2020. Conceitos: titular (dono dos dados), controlador (decide tratamento), operador (executa), ANPD (fiscaliza). Bases legais: consentimento, obrigacao legal, interesse legitimo."
+  },
+
+  // BLOCK 5: CONHECIMENTOS ESPECIFICOS
+  {
+    id:"ce-01", block:5, blockName:"Conhecimentos Especificos", topic:"Teoria das 3 Idades",
+    question:"Na arquivologia, o arquivo INTERMEDIARIO e aquele que:",
+    options:[
+      {key:"A", text:"Contem documentos de uso frequente e consulta constante."},
+      {key:"B", text:"Guarda documentos que aguardam destinacao final (eliminacao ou guarda permanente)."},
+      {key:"C", text:"Preserva documentos de valor historico permanentemente."},
+      {key:"D", text:"Armazena apenas documentos digitalizados."}
+    ],
+    correct:"B",
+    explanation:"Arquivo intermediario (2a idade) guarda documentos que nao sao mais de uso corrente mas ainda nao tiveram sua destinacao final definida. Aguardam prazos prescricionais ou a avaliacao para eliminacao ou recolhimento ao arquivo permanente.",
+    studySuggestion:"Teoria das 3 idades: Corrente (1a, uso frequente, no setor), Intermediario (2a, pouco consultado, aguarda destinacao), Permanente (3a, valor historico, nunca eliminado). Tabela de Temporalidade define prazos."
+  },
+  {
+    id:"ce-02", block:5, blockName:"Conhecimentos Especificos", topic:"Principios LIMPE",
+    question:"Os principios da Administracao Publica expressos no art. 37 da CF/88 sao representados pela sigla LIMPE. O 'E' refere-se a:",
+    options:[
+      {key:"A", text:"Equidade"},
+      {key:"B", text:"Economicidade"},
+      {key:"C", text:"Eficiencia"},
+      {key:"D", text:"Estabilidade"}
+    ],
+    correct:"C",
+    explanation:"LIMPE = Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiencia. O principio da Eficiencia foi incluido pela EC 19/1998 (Reforma Administrativa) e exige que a Administracao atue com produtividade e qualidade, com o melhor resultado com o menor custo.",
+    studySuggestion:"LIMPE: L-legalidade (agir conforme lei), I-impessoalidade (sem favorecimento), M-moralidade (etica), P-publicidade (transparencia), E-eficiencia (EC 19/98, resultado com economicidade)."
+  },
+  {
+    id:"ce-03", block:5, blockName:"Conhecimentos Especificos", topic:"Lei 9.784/1999",
+    question:"Segundo a Lei 9.784/1999 (Processo Administrativo Federal), o prazo para a Administracao decidir um processo e de:",
+    options:[
+      {key:"A", text:"15 dias, prorrogaveis por mais 15."},
+      {key:"B", text:"30 dias, prorrogaveis por mais 30."},
+      {key:"C", text:"60 dias, improrrogaveis."},
+      {key:"D", text:"90 dias, prorrogaveis por mais 90."}
+    ],
+    correct:"B",
+    explanation:"Art. 49 da Lei 9.784/99: a Administracao tem o dever de decidir em ate 30 dias, prorrogaveis por igual periodo (mais 30), desde que justificado. Total maximo: 60 dias.",
+    studySuggestion:"Lei 9.784/99: decisao em 30+30 dias, recurso em 10 dias, parecer em 15 dias, intimacao com 3 dias uteis de antecedencia. Principios: legalidade, finalidade, motivacao, contraditorio, ampla defesa."
+  },
+  {
+    id:"ce-04", block:5, blockName:"Conhecimentos Especificos", topic:"Redacao Oficial",
+    question:"O OFICIO e um documento de correspondencia oficial utilizado para:",
+    options:[
+      {key:"A", text:"Comunicacao interna entre setores de um mesmo orgao."},
+      {key:"B", text:"Comunicacao externa entre autoridades ou orgaos publicos diferentes."},
+      {key:"C", text:"Solicitacao de ferias por servidor publico."},
+      {key:"D", text:"Publicacao de normas no Diario Oficial."}
+    ],
+    correct:"B",
+    explanation:"O oficio e utilizado para comunicacoes oficiais EXTERNAS — entre orgaos publicos diferentes ou entre orgao publico e particulares. Para comunicacao INTERNA (dentro do mesmo orgao), usa-se o memorando.",
+    studySuggestion:"Documentos oficiais: Oficio (comunicacao externa), Memorando (interna, mesmo orgao), Requerimento (pedido do cidadao a autoridade), Relatorio (exposicao de atividades). Padrao: impessoalidade, clareza, concisao."
+  },
+  {
+    id:"ce-05", block:5, blockName:"Conhecimentos Especificos", topic:"Protocolo e Tramitacao",
+    question:"O setor de PROTOCOLO em uma reparticao publica e responsavel por:",
+    options:[
+      {key:"A", text:"Elaborar o orcamento anual do orgao."},
+      {key:"B", text:"Receber, registrar, classificar e distribuir documentos."},
+      {key:"C", text:"Aplicar sancoes disciplinares aos servidores."},
+      {key:"D", text:"Gerenciar a folha de pagamento."}
+    ],
+    correct:"B",
+    explanation:"O protocolo e responsavel pelo recebimento, registro, autuacao, classificacao, distribuicao, controle da tramitacao e expedicao de documentos. E a 'porta de entrada' oficial de documentos no orgao.",
+    studySuggestion:"Atividades de protocolo: recebimento, registro (numero/data), autuacao (abertura de processo), classificacao, distribuicao, controle de tramitacao, expedicao. Garante rastreabilidade do documento."
+  },
+  {
+    id:"ce-06", block:5, blockName:"Conhecimentos Especificos", topic:"Metodos de Arquivamento",
+    question:"O metodo de arquivamento ALFABETICO ordena os documentos:",
+    options:[
+      {key:"A", text:"Pela data de criacao do documento."},
+      {key:"B", text:"Pelo assunto principal do documento."},
+      {key:"C", text:"Pelo nome (de pessoas, empresas ou lugares)."},
+      {key:"D", text:"Por um codigo numerico sequencial."}
+    ],
+    correct:"C",
+    explanation:"O metodo alfabetico ordena documentos pelo nome (de pessoas, empresas, instituicoes ou localidades). E um metodo direto (nao precisa de indice auxiliar). Outros metodos: numerico (por numero), cronologico (por data), ideografico (por assunto).",
+    studySuggestion:"Metodos de arquivamento: Alfabetico (por nome, direto), Numerico (por codigo), Cronologico (por data), Geografico (por local), Ideografico/Assunto (por tema). Diretos: consulta sem indice. Indiretos: precisam de indice."
+  },
+  {
+    id:"ce-07", block:5, blockName:"Conhecimentos Especificos", topic:"Lei de Acesso a Informacao",
+    question:"Segundo a Lei de Acesso a Informacao (Lei 12.527/2011), qual o prazo maximo para resposta a pedido de informacao?",
+    options:[
+      {key:"A", text:"5 dias, prorrogaveis por mais 5."},
+      {key:"B", text:"10 dias, prorrogaveis por mais 10."},
+      {key:"C", text:"20 dias, prorrogaveis por mais 10."},
+      {key:"D", text:"30 dias, prorrogaveis por mais 15."}
+    ],
+    correct:"C",
+    explanation:"Art. 11 da LAI: o orgao tem 20 dias para responder, prorrogaveis por mais 10 dias mediante justificativa. Total maximo: 30 dias. A informacao deve ser fornecida de forma transparente e acessivel.",
+    studySuggestion:"LAI (12.527/2011): resposta em 20+10 dias, classificacao de sigilo (reservado 5 anos, secreto 15, ultrassecreto 25), transparencia ativa (publicar sem pedido) e passiva (mediante pedido)."
+  },
+  {
+    id:"ce-08", block:5, blockName:"Conhecimentos Especificos", topic:"Funcoes Administrativas",
+    question:"As quatro funcoes basicas da administracao (PODC) sao:",
+    options:[
+      {key:"A", text:"Planejar, Organizar, Dirigir e Controlar."},
+      {key:"B", text:"Produzir, Otimizar, Delegar e Comunicar."},
+      {key:"C", text:"Pesquisar, Operar, Desenvolver e Coordenar."},
+      {key:"D", text:"Priorizar, Ordenar, Despachar e Conferir."}
+    ],
+    correct:"A",
+    explanation:"PODC sao as 4 funcoes administrativas classicas definidas por Fayol: Planejar (definir objetivos), Organizar (alocar recursos), Dirigir (liderar/motivar equipes) e Controlar (monitorar resultados e corrigir desvios).",
+    studySuggestion:"PODC (Fayol): Planejar (metas, estrategias), Organizar (estrutura, recursos), Dirigir (lideranca, comunicacao, motivacao), Controlar (indicadores, correcao). Base da Teoria Classica da Administracao."
+  },
+  {
+    id:"ce-09", block:5, blockName:"Conhecimentos Especificos", topic:"Direitos e Deveres do Servidor",
+    question:"E um DEVER do servidor publico, conforme legislacao:",
+    options:[
+      {key:"A", text:"Exercer atividade empresarial paralela sem restricoes."},
+      {key:"B", text:"Tratar com urbanidade as pessoas que procuram o servico publico."},
+      {key:"C", text:"Recusar tarefas que considere abaixo de sua funcao."},
+      {key:"D", text:"Utilizar equipamentos publicos para fins pessoais em horario de almoco."}
+    ],
+    correct:"B",
+    explanation:"Tratar com urbanidade (cortesia, educacao, respeito) o publico em geral e os colegas e um dever fundamental do servidor publico, previsto na maioria dos estatutos e no Codigo de Etica do Servidor (Decreto 1.171/94).",
+    studySuggestion:"Deveres do servidor: assiduidade, pontualidade, urbanidade, lealdade, obediencia, sigilo. Proibicoes: receber propina, usar cargo para proveito pessoal, atuar como procurador junto a reparticao."
+  },
+  {
+    id:"ce-10", block:5, blockName:"Conhecimentos Especificos", topic:"Anulacao e Revogacao",
+    question:"A ANULACAO de um ato administrativo ocorre quando:",
+    options:[
+      {key:"A", text:"O ato se torna inconveniente ou inoportuno para a Administracao."},
+      {key:"B", text:"O ato apresenta vicio de ilegalidade."},
+      {key:"C", text:"O prazo de validade do ato expira."},
+      {key:"D", text:"O servidor responsavel e transferido de setor."}
+    ],
+    correct:"B",
+    explanation:"Anulacao = ato ilegal (vicio de legalidade), efeitos retroativos (ex tunc), pode ser feita pela Administracao ou Judiciario. Revogacao = ato legal mas inconveniente/inoportuno, efeitos futuros (ex nunc), somente pela Administracao.",
+    studySuggestion:"Anulacao: ilegalidade, ex tunc (retroage), Administracao ou Judiciario. Revogacao: merito (conveniencia/oportunidade), ex nunc (futuro), so Administracao. Sumula 473 STF: autotutela."
+  }
+];
+
+// ====== STATE MANAGEMENT ======
+const STORAGE_KEY = 'dandara_quiz_v1';
+
+function loadProgress() {
+  try {
+    const data = localStorage.getItem(STORAGE_KEY);
+    if (data) return JSON.parse(data);
+  } catch(e) {}
+  return { version:1, blocks:{}, totalCorrect:0, totalAnswered:0 };
+}
+
+function saveProgress(progress) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+}
+
+let progress = loadProgress();
+let currentBlock = null;
+let currentIndex = 0;
+let isAnswered = false;
+
+// ====== ROUTER ======
+function navigate(hash) {
+  window.location.hash = hash;
+}
+
+function goBack() {
+  const hash = window.location.hash;
+  if (hash.startsWith('#/quiz/') || hash.startsWith('#/results/')) {
+    navigate('#/blocks');
+  } else if (hash === '#/blocks' || hash === '#/dashboard') {
+    navigate('#/');
+  } else {
+    navigate('#/');
+  }
+}
+
+function handleRoute() {
+  const hash = window.location.hash || '#/';
+  const screens = document.querySelectorAll('.screen');
+  screens.forEach(s => s.classList.remove('active'));
+
+  const navBack = document.getElementById('navBack');
+  const navTitle = document.getElementById('navTitle');
+  const navProgress = document.getElementById('navProgress');
+
+  if (hash === '#/' || hash === '') {
+    document.getElementById('screenLanding').classList.add('active');
+    navBack.style.display = 'none';
+    navTitle.textContent = 'Quiz Escriturario';
+    navProgress.textContent = '';
+    renderLanding();
+  } else if (hash === '#/blocks') {
+    document.getElementById('screenBlocks').classList.add('active');
+    navBack.style.display = 'inline-block';
+    navTitle.textContent = 'Escolha um Bloco';
+    navProgress.textContent = '';
+    renderBlocks();
+  } else if (hash.startsWith('#/quiz/')) {
+    const blockId = parseInt(hash.split('/')[2]);
+    document.getElementById('screenQuiz').classList.add('active');
+    navBack.style.display = 'inline-block';
+    navTitle.textContent = getBlockName(blockId);
+    startQuiz(blockId);
+  } else if (hash.startsWith('#/results/')) {
+    const blockId = parseInt(hash.split('/')[2]);
+    document.getElementById('screenResults').classList.add('active');
+    navBack.style.display = 'inline-block';
+    navTitle.textContent = 'Resultado';
+    navProgress.textContent = '';
+    renderResults(blockId);
+  } else if (hash === '#/dashboard') {
+    document.getElementById('screenDashboard').classList.add('active');
+    navBack.style.display = 'inline-block';
+    navTitle.textContent = 'Dashboard';
+    navProgress.textContent = '';
+    renderDashboard();
+  }
+}
+
+// ====== HELPERS ======
+function getBlockName(id) {
+  const names = {1:'Lingua Portuguesa',2:'Matematica',3:'Conhecimentos Gerais',4:'Informatica',5:'Conhecimentos Especificos'};
+  return names[id] || '';
+}
+
+function getBlockIcon(id) {
+  const icons = {1:'\u{1F4DA}',2:'\u{1F522}',3:'\u{1F30E}',4:'\u{1F4BB}',5:'\u{1F3DB}'};
+  return icons[id] || '';
+}
+
+function getBlockQuestions(blockId) {
+  return QUESTIONS.filter(q => q.block === blockId);
+}
+
+function getBlockProgress(blockId) {
+  const blockData = progress.blocks[blockId];
+  if (!blockData || !blockData.answers) return { answered:0, correct:0, total:10 };
+  const answers = Object.values(blockData.answers);
+  return {
+    answered: answers.length,
+    correct: answers.filter(a => a.correct).length,
+    total: 10
+  };
+}
+
+// ====== RENDERERS ======
+function renderLanding() {
+  progress = loadProgress();
+  const totalAnswered = progress.totalAnswered || 0;
+  const totalCorrect = progress.totalCorrect || 0;
+  const pct = totalAnswered > 0 ? Math.round((totalAnswered / 50) * 100) : 0;
+  const accuracy = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) + '%' : '--';
+
+  document.getElementById('landingPct').textContent = pct + '%';
+  document.getElementById('statAnswered').textContent = totalAnswered;
+  document.getElementById('statCorrect').textContent = totalCorrect;
+  document.getElementById('statAccuracy').textContent = accuracy;
+
+  const circumference = 2 * Math.PI * 65;
+  const offset = circumference - (pct / 100) * circumference;
+  document.getElementById('progressRing').style.strokeDashoffset = offset;
+}
+
+function renderBlocks() {
+  progress = loadProgress();
+  const grid = document.getElementById('blocksGrid');
+  let html = '';
+
+  for (let i = 1; i <= 5; i++) {
+    const bp = getBlockProgress(i);
+    const status = bp.answered === 10 ? 'completed' : bp.answered > 0 ? 'in-progress' : '';
+    const meta = bp.answered === 10
+      ? `${bp.correct}/10 acertos`
+      : bp.answered > 0
+        ? `${bp.answered}/10 respondidas`
+        : '10 questoes';
+    const pctWidth = (bp.answered / 10) * 100;
+
+    html += `
+      <div class="block-card ${status}" onclick="navigate('#/quiz/${i}')">
+        <div class="block-icon">${getBlockIcon(i)}</div>
+        <div class="block-info">
+          <div class="block-name">${getBlockName(i)}</div>
+          <div class="block-meta">${meta}</div>
+          <div class="block-progress-bar"><div class="block-progress-fill" style="width:${pctWidth}%"></div></div>
+        </div>
+      </div>`;
+  }
+  grid.innerHTML = html;
+}
+
+function startQuiz(blockId) {
+  progress = loadProgress();
+  currentBlock = blockId;
+  isAnswered = false;
+
+  const blockData = progress.blocks[blockId];
+  if (blockData && blockData.answers) {
+    currentIndex = Object.keys(blockData.answers).length;
+    if (currentIndex >= 10) currentIndex = 0;
+  } else {
+    currentIndex = 0;
+  }
+
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const questions = getBlockQuestions(currentBlock);
+  const q = questions[currentIndex];
+  isAnswered = false;
+
+  document.getElementById('navProgress').textContent = `${currentIndex + 1}/10`;
+
+  // Dots
+  let dotsHtml = '';
+  const blockData = progress.blocks[currentBlock];
+  for (let i = 0; i < 10; i++) {
+    let cls = 'quiz-dot';
+    if (i === currentIndex) cls += ' current';
+    else if (blockData && blockData.answers) {
+      const qId = questions[i].id;
+      if (blockData.answers[qId]) {
+        cls += blockData.answers[qId].correct ? ' correct' : ' wrong';
+      }
+    }
+    dotsHtml += `<div class="${cls}"></div>`;
+  }
+  document.getElementById('quizDots').innerHTML = dotsHtml;
+  document.getElementById('quizCounter').textContent = `Questao ${currentIndex + 1} de 10`;
+  document.getElementById('quizTopic').textContent = q.topic;
+  document.getElementById('quizQuestion').textContent = q.question;
+
+  // Options
+  let optHtml = '';
+  for (const opt of q.options) {
+    optHtml += `
+      <button class="option-btn" data-key="${opt.key}" onclick="selectAnswer('${opt.key}')">
+        <span class="option-key">${opt.key}</span>
+        <span class="option-text">${opt.text}</span>
+      </button>`;
+  }
+  document.getElementById('quizOptions').innerHTML = optHtml;
+
+  // Hide explanation and next
+  document.getElementById('explanationPanel').classList.remove('visible');
+  document.getElementById('btnNext').style.display = 'none';
+  document.getElementById('studySuggestion').style.display = 'none';
+}
+
+function selectAnswer(key) {
+  if (isAnswered) return;
+  isAnswered = true;
+
+  const questions = getBlockQuestions(currentBlock);
+  const q = questions[currentIndex];
+  const isCorrect = key === q.correct;
+
+  // Update progress
+  if (!progress.blocks[currentBlock]) {
+    progress.blocks[currentBlock] = { answers: {}, completed: false };
+  }
+  progress.blocks[currentBlock].answers[q.id] = { selected: key, correct: isCorrect };
+
+  // Recalculate totals
+  let totalA = 0, totalC = 0;
+  for (const b of Object.values(progress.blocks)) {
+    if (b.answers) {
+      const ans = Object.values(b.answers);
+      totalA += ans.length;
+      totalC += ans.filter(a => a.correct).length;
+    }
+  }
+  progress.totalAnswered = totalA;
+  progress.totalCorrect = totalC;
+
+  // Check block complete
+  if (Object.keys(progress.blocks[currentBlock].answers).length >= 10) {
+    progress.blocks[currentBlock].completed = true;
+  }
+
+  saveProgress(progress);
+
+  // Visual feedback
+  const buttons = document.querySelectorAll('.option-btn');
+  buttons.forEach(btn => {
+    btn.classList.add('disabled');
+    const btnKey = btn.dataset.key;
+    if (btnKey === key && isCorrect) {
+      btn.classList.add('selected-correct');
+    } else if (btnKey === key && !isCorrect) {
+      btn.classList.add('selected-wrong');
+    }
+    if (btnKey === q.correct && !isCorrect) {
+      btn.classList.add('reveal-correct');
+    }
+  });
+
+  // Show explanation
+  document.getElementById('explanationText').textContent = q.explanation;
+  document.getElementById('explanationPanel').classList.add('visible');
+
+  if (!isCorrect) {
+    document.getElementById('studySuggestion').style.display = 'block';
+    document.getElementById('studySuggestionText').textContent = q.studySuggestion;
+  } else {
+    document.getElementById('studySuggestion').style.display = 'none';
+  }
+
+  // Show next button
+  const btnNext = document.getElementById('btnNext');
+  if (currentIndex < 9) {
+    btnNext.textContent = 'Proxima Questao';
+  } else {
+    btnNext.textContent = 'Ver Resultado';
+  }
+  btnNext.style.display = 'block';
+
+  // Update dot
+  const dots = document.querySelectorAll('.quiz-dot');
+  dots[currentIndex].classList.remove('current');
+  dots[currentIndex].classList.add(isCorrect ? 'correct' : 'wrong');
+}
+
+function nextQuestion() {
+  if (currentIndex < 9) {
+    currentIndex++;
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    navigate(`#/results/${currentBlock}`);
+  }
+}
+
+function renderResults(blockId) {
+  progress = loadProgress();
+  const questions = getBlockQuestions(blockId);
+  const blockData = progress.blocks[blockId];
+
+  if (!blockData || !blockData.answers) {
+    navigate('#/blocks');
+    return;
+  }
+
+  const answers = blockData.answers;
+  const correct = Object.values(answers).filter(a => a.correct).length;
+  const total = Object.keys(answers).length;
+  const pct = Math.round((correct / total) * 100);
+
+  // Score circle
+  const circumference = 2 * Math.PI * 56;
+  const offset = circumference - (pct / 100) * circumference;
+  const circle = document.getElementById('resultsCircle');
+  circle.style.strokeDashoffset = offset;
+  circle.style.stroke = pct >= 70 ? 'var(--correct)' : pct >= 40 ? 'var(--amber)' : 'var(--wrong)';
+
+  document.getElementById('resultsNumber').textContent = `${correct}/${total}`;
+
+  const messages = {
+    high: 'Excelente! Voce mandou bem!',
+    mid: 'Bom trabalho! Continue estudando!',
+    low: 'Nao desista! Revise os topicos abaixo.'
+  };
+  const msgEl = document.getElementById('resultsMessage');
+  msgEl.textContent = pct >= 70 ? messages.high : pct >= 40 ? messages.mid : messages.low;
+  msgEl.style.color = pct >= 70 ? 'var(--correct)' : pct >= 40 ? 'var(--amber)' : 'var(--wrong)';
+
+  // Results list
+  let listHtml = '';
+  const weakTopics = [];
+  for (const q of questions) {
+    const ans = answers[q.id];
+    if (ans) {
+      const icon = ans.correct ? '<div class="result-icon correct">&#10003;</div>' : '<div class="result-icon wrong">&#10007;</div>';
+      listHtml += `<div class="result-item">${icon}<span class="result-topic">${q.topic}</span></div>`;
+      if (!ans.correct) weakTopics.push(q);
+    }
+  }
+  document.getElementById('resultsList').innerHTML = listHtml;
+
+  // Weak topics
+  const weakDiv = document.getElementById('weakTopics');
+  if (weakTopics.length > 0) {
+    weakDiv.style.display = 'block';
+    let weakHtml = '';
+    for (const q of weakTopics) {
+      weakHtml += `<div class="weak-topic-item"><strong>${q.topic}:</strong> ${q.studySuggestion}</div>`;
+    }
+    document.getElementById('weakTopicsList').innerHTML = weakHtml;
+  } else {
+    weakDiv.style.display = 'none';
+  }
+
+  // Store current block for retry
+  currentBlock = blockId;
+}
+
+function retryBlock() {
+  if (currentBlock && progress.blocks[currentBlock]) {
+    const oldAnswers = progress.blocks[currentBlock].answers || {};
+    const oldCorrect = Object.values(oldAnswers).filter(a => a.correct).length;
+    const oldTotal = Object.keys(oldAnswers).length;
+
+    progress.totalAnswered -= oldTotal;
+    progress.totalCorrect -= oldCorrect;
+    progress.blocks[currentBlock] = { answers: {}, completed: false };
+    saveProgress(progress);
+  }
+  currentIndex = 0;
+  navigate(`#/quiz/${currentBlock}`);
+}
+
+function renderDashboard() {
+  progress = loadProgress();
+  let html = '';
+
+  for (let i = 1; i <= 5; i++) {
+    const bp = getBlockProgress(i);
+    let scoreText = '--';
+    let scoreColor = 'var(--text-muted)';
+    if (bp.answered > 0) {
+      const pct = Math.round((bp.correct / bp.answered) * 100);
+      scoreText = `${bp.correct}/${bp.answered} (${pct}%)`;
+      scoreColor = pct >= 70 ? 'var(--correct)' : pct >= 40 ? 'var(--amber)' : 'var(--wrong)';
+    }
+    html += `
+      <div class="dash-block">
+        <span style="font-size:20px">${getBlockIcon(i)}</span>
+        <span class="dash-block-name">${getBlockName(i)}</span>
+        <span class="dash-block-score" style="color:${scoreColor}">${scoreText}</span>
+      </div>`;
+  }
+  document.getElementById('dashBlocks').innerHTML = html;
+
+  // All weak topics
+  const allWeak = [];
+  for (const [blockId, blockData] of Object.entries(progress.blocks)) {
+    if (!blockData.answers) continue;
+    const questions = getBlockQuestions(parseInt(blockId));
+    for (const q of questions) {
+      const ans = blockData.answers[q.id];
+      if (ans && !ans.correct) {
+        allWeak.push(q);
+      }
+    }
+  }
+
+  const dashWeak = document.getElementById('dashWeakTopics');
+  if (allWeak.length > 0) {
+    dashWeak.style.display = 'block';
+    let weakHtml = '';
+    const seen = new Set();
+    for (const q of allWeak) {
+      if (!seen.has(q.topic)) {
+        seen.add(q.topic);
+        weakHtml += `<div class="weak-topic-item"><strong>${q.topic}</strong> (${q.blockName})</div>`;
+      }
+    }
+    document.getElementById('dashWeakList').innerHTML = weakHtml;
+  } else {
+    dashWeak.style.display = 'none';
+  }
+}
+
+function confirmReset() {
+  const btn = event.target;
+  if (btn.dataset.confirm === 'true') {
+    localStorage.removeItem(STORAGE_KEY);
+    progress = loadProgress();
+    btn.textContent = 'Resetar Progresso';
+    btn.dataset.confirm = '';
+    navigate('#/');
+  } else {
+    btn.textContent = 'Confirmar Reset? (clique de novo)';
+    btn.dataset.confirm = 'true';
+    setTimeout(() => {
+      btn.textContent = 'Resetar Progresso';
+      btn.dataset.confirm = '';
+    }, 3000);
+  }
+}
+
+// ====== INIT ======
+window.addEventListener('hashchange', handleRoute);
+handleRoute();
 </script>
 </body>
 </html>
-
